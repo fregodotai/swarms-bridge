@@ -20,6 +20,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "express": "^4.21.2",
+    "fxn-protocol-sdk": "github:Oz-Networks/fxn-protocol-sdk#main",
     "pm2": "^5.4.3",
     "tsconfig-paths": "^4.2.0"
   },
