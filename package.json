@@ -4,13 +4,16 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "pm2-runtime start ecosystem.config.js",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "dotenv": "^16.4.7",
     "eslint": "^9.16.0",

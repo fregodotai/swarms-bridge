@@ -2,12 +2,11 @@ module.exports = {
   apps: [
     {
       name: 'fxn-connector',
-      script: './index.js',
-      instances: 'max',
+      script: './dist/index.js',
+      instances: '1',
+      exec_mode: 'cluster',
+      max_restarts: 10,
       env: {
-        NODE_ENV: 'development',
-      },
-      env_production: {
         NODE_ENV: 'production',
       },
     },
