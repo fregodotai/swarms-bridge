@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ignore": [
+        "node_modules",
+        "dist"
+    ],
+    "ext": "ts",
+    "exec": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register src/index.ts\""
+}
