@@ -16,10 +16,7 @@
     "incremental": true,
     "declarationMap": true,
     "target": "ES6",
-    "typeRoots": ["./src/types", "./node_modules/@types"],
-    "paths": {
-      "@fxn-protocol/*": ["./node_modules/fxn-protocol-sdk/dist/*"]
-    }
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*spec.ts", "**/*unit.ts"]

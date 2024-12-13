@@ -2,6 +2,9 @@ import express from 'express';
 import config from './config/config';
 import { routes } from './routes';
 import { notFoundHandler } from './utils/error-handlers';
+import Provider from './fxn/Provider';
+
+export const provider = new Provider();
 
 const app = express();
 
