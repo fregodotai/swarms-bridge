@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsoa spec-and-routes && npx tsc --experimentalDecorators",
-    "start": "pm2-runtime start ecosystem.config.js",
+    "build": "tsoa spec-and-routes && npx tsc --outDir dist --experimentalDecorators",
+    "start": "pm2-runtime start dist/ecosystem.config.js",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "generate-keypair": "ts-node src/utils/generate-keypair.ts",
     "lint": "cross-env NODE_OPTIONS=--max_old_space_size=8192 npx eslint --fix ."
