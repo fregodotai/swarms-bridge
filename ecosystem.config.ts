@@ -3,7 +3,7 @@ module.exports = {
   apps: [
     {
       name: 'fxn-connector',
-      script: 'index.js',
+      script: './src/index.js',
       instances: '1',
       exec_mode: 'cluster',
       max_restarts: 10,
