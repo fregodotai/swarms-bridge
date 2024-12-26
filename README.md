@@ -1,6 +1,6 @@
 # Fxn Connector
 
-Fxn Connector is a REST API server designed to facilitate interaction with the [fxn-protocol-sdk]("https://github.com/Oz-Networks/fxn-protocol-sdk") on the Solana blockchain. The server allows use the SDK methods in your own application.
+Fxn Connector is a REST API server designed to facilitate interaction with the [fxn-protocol-sdk](https://github.com/Oz-Networks/fxn-protocol-sdk) on the Solana blockchain. The server allows use the SDK methods in your own application.
 
 ## Features
 
@@ -21,7 +21,7 @@ Follow these steps to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/fxn-connector.git
+   git clone https://github.com/janpromethean/fxn-connector.git
    cd fxn-connector
    ```
 
