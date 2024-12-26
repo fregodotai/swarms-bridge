@@ -8,7 +8,11 @@ import swaggerDocument from '../swagger/swagger.json';
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://fxn-connector-prod-48a023245efe.herokuapp.com/',
+  }),
+);
 
 app.use(
   urlencoded({
