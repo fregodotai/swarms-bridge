@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "pm2-runtime start ecosystem.config.js",
-    "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "generate-keypair": "ts-node src/fxn/generate-keypair.ts"
+    "start": "cross-env NODE_ENV=production pm2-runtime start ecosystem.config.js",
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "generate-keypair": "ts-node src/utils/generate-keypair.ts",
+    "lint": "cross-env NODE_OPTIONS=--max_old_space_size=8192 npx eslint --fix ."
   },
   "keywords": [],
   "author": "",
@@ -18,29 +19,46 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1",
     "@solana/spl-token": "^0.4.9",
+    "@solana/web3.js": "^1.98.0",
+    "bn.js": "^5.1.2",
     "bs58": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "eslint": "^9.16.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.1",
     "express": "^4.21.2",
     "fxn-protocol-sdk": "github:Oz-Networks/fxn-protocol-sdk#main",
     "pm2": "^5.4.3",
-    "tsconfig-paths": "^4.2.0"
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^6.6.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.4",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
-    "@typescript-eslint/eslint-plugin": "^8.18.0",
-    "@typescript-eslint/parser": "^8.18.0",
+    "@types/swagger-ui-express": "^4.1.7",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "class-validator": "^0.14.1",
     "concurrently": "^9.1.0",
-    "nodemon": "^3.1.7",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
-  "overrides": {
-    "ajv": "^8.17.1",
-    "uglify-js": "^3.19.3"
+  "lint-staged": {
+    "*.{ts}": "npm run lint --max-warnings=0 --fix",
+    "*.{ts,md,json}": "prettier --write"
   }
 }

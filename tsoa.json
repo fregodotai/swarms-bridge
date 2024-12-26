@@ -1,0 +1,23 @@
+{
+    "entryFile": "src/index.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": [
+        "src/**/*.controller.ts"
+    ],
+    "spec": {
+        "outputDirectory": "./swagger",
+        "specVersion": 3,
+        "host": "fxn-connector-prod-48a023245efe.herokuapp.com",
+        "basePath": "/api/v1",
+        "json": true,
+        "schemes": [
+            "http",
+            "https"
+        ]
+    },
+    "routes": {
+        "basePath": "/api/v1",
+        "routesDir": "./src/routes",
+        "middleware": "express"
+    }
+}

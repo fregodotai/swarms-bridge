@@ -2,8 +2,9 @@
 
 import fs from 'fs';
 import readline from 'readline';
-import bs58 from 'bs58';
+
 import { Keypair } from '@solana/web3.js';
+import bs58 from 'bs58';
 
 const prompt = (query: string): Promise<string> => {
   const rl = readline.createInterface({
@@ -18,7 +19,7 @@ const prompt = (query: string): Promise<string> => {
   );
 };
 
-(async () => {
+await (async () => {
   console.log('\n=== Export Solana wallet Keypair to .env ===\n');
 
   try {

@@ -7,6 +7,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
+    "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
@@ -18,6 +19,6 @@
     "target": "ES6",
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts", "eslint.config.mjs", "ecosystem.config.ts"],
   "exclude": ["node_modules", "dist", "**/*spec.ts", "**/*unit.ts"]
 }
