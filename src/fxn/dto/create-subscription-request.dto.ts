@@ -9,7 +9,7 @@ export default class CreateSubscriptionRequestDto {
   @IsString()
   recipient: string;
 
-  @IsNumber({})
+  @IsNumber()
   durationInDays: number;
 
   @IsSolanaPublicKey()

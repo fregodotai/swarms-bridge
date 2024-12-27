@@ -123,7 +123,7 @@ export default class FxnService {
       const subscriberDetails =
         await this.adapter.getSubscriptionsForProvider(providerPublicKey);
       return {
-        subscriberDetails: subscriberDetails as unknown as SubscriberDetails[],
+        subscriptions: subscriberDetails as unknown as SubscriberDetails[],
       };
     } catch (error) {
       throw new ServiceError(error, [
@@ -140,7 +140,7 @@ export default class FxnService {
   ): GetAllSubscriptionsResponse {
     try {
       const subscriptions =
-        await this.adapter.getSubscriptionsForProvider(userPublicKey);
+        await this.adapter.getAllSubscriptionsForUser(userPublicKey);
 
       return { subscriptions };
     } catch (error) {

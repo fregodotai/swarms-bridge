@@ -3,7 +3,7 @@ import express, { json, urlencoded } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
 import { RegisterRoutes } from './routes/routes';
-import { notFoundHandler } from './utils/error-handlers';
+import { errorHandler, notFoundHandler } from './utils/error-handlers';
 import swaggerDocument from '../swagger/swagger.json';
 
 const app = express();
@@ -26,6 +26,10 @@ RegisterRoutes(app);
 app.use('/api/v1', notFoundHandler);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/', express.static('src/web'));
+
+app.use(errorHandler);
 
 export const start = (port: string | number) => {
   app.listen(port, () => {

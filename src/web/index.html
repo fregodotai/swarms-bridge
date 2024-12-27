@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FXN Controller</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #1e1e1e;
+        color: #f7f7f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow: auto;
+      }
+
+      .container {
+        background-color: #2d2d2d;
+        border-radius: 12px;
+        padding: 20px 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        margin: 20px;
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      p,
+      li {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #c2c2c2;
+        line-height: 1.5;
+      }
+      div {
+        font-size: 16px;
+        color: #c2c2c2;
+        line-height: 1.5;
+      }
+
+      b {
+        color: #fff;
+      }
+
+      a {
+        color: #00aaff;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      pre {
+        background-color: #1e1e1e;
+        padding: 10px;
+        border-radius: 6px;
+        overflow: auto;
+        color: #eaeaea;
+        font-size: 14px;
+      }
+
+      code {
+        font-family: monospace;
+        background-color: #1e1e1e;
+        padding: 4px 6px;
+        border-radius: 8px;
+        color: #fff;
+      }
+
+      code a {
+        text-decoration: underline;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+      }
+
+      code a:hover {
+        color: #00aaff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>FXN Controller Documentation</h1>
+
+      <h2>Overview</h2>
+      <p>
+        Our API acts as a versatile bridge, enabling seamless integration of
+        <a href="https://github.com/Oz-Networks/fxn-protocol-sdk"
+          >fxn-protocol-sdk</a
+        >
+        JavaScript SDK with other programming languages, such as Python. It
+        provides a language-agnostic interface, allowing developers to harness
+        the capabilities of the JS SDK without being constrained by its native
+        environment.
+      </p>
+
+      <p>With this API, developers can:</p>
+      <ul>
+        <li>
+          Leverage JS SDK Features: Access and utilize all SDK functionalities
+          through a standardized API.
+        </li>
+        <li>
+          Cross-Language Compatibility: Simplify integration in diverse
+          environments like Python, Java, Ruby, or any language that supports
+          HTTP.
+        </li>
+        <li>
+          Effortless Integration: Minimize the complexity of incorporating
+          advanced features into non-JavaScript projects.
+        </li>
+      </ul>
+
+      <h2>fxn-protocol-sdk Documentation</h2>
+      <h3>Github</h3>
+      <ul>
+        <li>
+          <a href="https://github.com/Oz-Networks/fxn-protocol-sdk"
+            >fxn-protocol-sdk</a
+          >
+        </li>
+      </ul>
+      <h3>Web</h3>
+      <ul>
+        <li><a href="https://docs.fxn.world/">Introduction</a></li>
+        <li><a href="https://docs.fxn.world/key-concepts">Key Concepts</a></li>
+        <li>
+          <a href="https://docs.fxn.world/brand-guidelines">Brand Guidelines</a>
+        </li>
+        <li>
+          <a href="https://docs.fxn.world/developers/quick-start"
+            >Quick Start</a
+          >
+        </li>
+        <li><a href="https://docs.fxn.world/faq">FAQ</a></li>
+      </ul>
+
+      <h2>API Documentation</h2>
+      <p>
+        Access the
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/"
+          >Swagger UI documentation</a
+        >
+        to explore available endpoints and test API requests.
+      </p>
+
+      <h3>Endpoints</h3>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/SetDataProviderFee"
+        >
+          Set a Fee for Data Provider
+        </a>
+      </h4>
+      <p>Sets the data provider fee for a subscription.</p>
+      <div>Method: <b>POST</b></div>
+      <div>Path: <b>/data-provider-fee</b></div>
+      <div>Request Body:</div>
+      <ul>
+        <li><code>dataProviderFee</code>: The new data provider fee.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>transactionSignature</code>: The signature of the transaction.
+        </li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/CreateSubscription"
+        >
+          Create Subscription
+        </a>
+      </h4>
+      <p>Creates a new subscription.</p>
+      <div>Method: <b>POST</b></div>
+      <div>Path: <b>/create-subscription</b></div>
+      <div>Request Body:</div>
+      <ul>
+        <li><code>dataProvider</code>: The data provider address.</li>
+        <li><code>recipient</code>: The recipient address.</li>
+        <li><code>durationInDays</code>: The duration of the subscription.</li>
+        <li><code>nftTokenAccount</code>: The NFT token account.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>transactionSignature</code>: The signature of the transaction.
+        </li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionStatus"
+        >
+          Get Subscription Status
+        </a>
+      </h4>
+      <p>Gets the status of a subscription.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-subscription-status</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>endTime</code>: The end time of the subscription.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>subscriptionStatus</code>: The status of the subscription.
+        </li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetProviderTokenAccount"
+        >
+          Get Provider Token Account
+        </a>
+      </h4>
+      <p>Gets the token account of a provider.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-provider-token-account</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>providerAddress</code>: The address of the provider.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li><code>tokenAccount</code>: The token account of the provider.</li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionsForProvider"
+        >
+          Get Subscriptions for Provider
+        </a>
+      </h4>
+      <p>Gets the subscriptions for a provider.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-subscriptions-for-provider</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>providerPublicKey</code>: The public key of the provider.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li><code>subscriptions</code>: The subscriptions for the provider.</li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetAllSubscriptionsForUser"
+        >
+          Get All Subscriptions for User
+        </a>
+      </h4>
+      <p>Gets all subscriptions for a user.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-subscriptions-for-user</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>userPublicKey</code>: The public key of the user.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li><code>subscriptions</code>: The subscriptions for the user.</li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/RenewSubscription"
+        >
+          Renew Subscription
+        </a>
+      </h4>
+      <p>Renews a subscription.</p>
+      <div>Method: <b>POST</b></div>
+      <div>Path: <b>/renew-subscription</b></div>
+      <div>Request Body:</div>
+      <ul>
+        <li><code>dataProvider</code>: The data provider address.</li>
+        <li><code>newRecipient</code>: The new recipient address.</li>
+        <li><code>newEndTime</code>: The new end time.</li>
+        <li><code>qualityScore</code>: The quality score.</li>
+        <li><code>nftTokenAccount</code>: The NFT token account.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>transactionSignature</code>: The signature of the transaction.
+        </li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/CancelSubscription"
+        >
+          Cancel Subscription
+        </a>
+      </h4>
+      <p>Cancels a subscription.</p>
+      <div>Method: <b>POST</b></div>
+      <div>Path: <b>/cancel-subscription</b></div>
+      <div>Request Body:</div>
+      <ul>
+        <li><code>dataProvider</code>: The data provider address.</li>
+        <li><code>qualityScore</code>: The quality score.</li>
+        <li><code>nftTokenAccount</code>: The NFT token account.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>transactionSignature</code>: The signature of the transaction.
+        </li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionState"
+        >
+          Get Subscription State
+        </a>
+      </h4>
+      <p>Gets the state of a subscription.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-subscription-state</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li>
+          <code>subscriptionPDA</code>: The program address of the subscription
+          PDA.
+        </li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li><code>recipient</code>: The recipient of the subscription.</li>
+        <li><code>endTime</code>: The end time of the subscription.</li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetQualityInfo"
+        >
+          Get Quality Info
+        </a>
+      </h4>
+      <p>Gets the quality score of a data provider.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-quality-info</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>dataProvider</code>: The data provider address.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li>
+          <code>qualities</code>: The quality scores of the data provider.
+        </li>
+        <li>
+          <code>currentIndex</code>: The index of the current quality score.
+        </li>
+        <li><code>quality</code>: The current quality score.</li>
+        <li><code>subscriber</code>: The subscriber of the data provider.</li>
+      </ul>
+
+      <h4>
+        <a
+          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetProgramAddress"
+        >
+          Get Program Address
+        </a>
+      </h4>
+      <p>Gets the program address of the FXN protocol.</p>
+      <div>Method: <b>GET</b></div>
+      <div>Path: <b>/get-program-address</b></div>
+      <div>Query Parameters:</div>
+      <ul>
+        <li><code>dataProvider</code>: The data provider address.</li>
+        <li><code>subscriber</code>: The subscriber address.</li>
+      </ul>
+      <div>Response:</div>
+      <ul>
+        <li><code>statePDA</code>: The program address of the state PDA.</li>
+        <li>
+          <code>qualityPDA</code>: The program address of the quality PDA.
+        </li>
+        <li>
+          <code>subscriptionPDA</code>: The program address of the subscription
+          PDA.
+        </li>
+        <li>
+          <code>subscribersListPDA</code>: The program address of the
+          subscribers list PDA.
+        </li>
+        <li>
+          <code>dataProviderFeePDA</code>: The program address of the data
+          provider fee PDA.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

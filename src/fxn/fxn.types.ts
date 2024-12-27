@@ -1,15 +1,16 @@
 import { IdlAccounts } from '@coral-xyz/anchor';
 import { PublicKey, TransactionSignature } from '@solana/web3.js';
 import { SubscriptionManager } from 'fxn-protocol-sdk';
-import { SubscriptionStatus } from 'fxn-protocol-sdk/dist/client/fxn-solana-adapter';
+
+export interface SubscriptionAccount {
+  endTime: number;
+  recipient: string;
+}
 
 export interface SubscriberDetails {
   subscriber: PublicKey;
   subscriptionPDA: PublicKey;
-  subscription: {
-    endTime: number;
-    recipient: string;
-  };
+  subscription: SubscriptionAccount;
   status: SubscriptionStatus['status'];
 }
 
@@ -19,6 +20,11 @@ export interface ProgramAddressResponse {
   subscriptionPDA: PublicKey;
   subscribersListPDA: PublicKey;
   dataProviderFeePDA: PublicKey;
+}
+
+export interface SubscriptionStatus {
+  status: 'active' | 'expired' | 'expiring_soon';
+  subscription: SubscriptionAccount;
 }
 
 export type TransactionSignatureResponse = Promise<{
@@ -34,11 +40,11 @@ export type GetProviderTokenAccountResponse = Promise<{
 }>;
 
 export type GetSubscriberDetailsResponse = Promise<{
-  subscriberDetails: SubscriberDetails[];
+  subscriptions: SubscriberDetails[];
 }>;
 
 export type GetAllSubscriptionsResponse = Promise<{
-  subscriptions: SubscriberDetails[];
+  subscriptions: SubscriptionStatus[];
 }>;
 
 export type GetSubscriptionStateResponse = Promise<{

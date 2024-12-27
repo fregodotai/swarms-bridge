@@ -7,7 +7,8 @@
     "start": "pm2-runtime start dist/ecosystem.config.js",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "generate-keypair": "ts-node src/utils/generate-keypair.ts",
-    "lint": "cross-env NODE_OPTIONS=--max_old_space_size=8192 npx eslint --fix ."
+    "lint": "cross-env NODE_OPTIONS=--max_old_space_size=8192 npx eslint --fix .",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",

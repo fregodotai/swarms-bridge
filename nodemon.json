@@ -1,13 +1,6 @@
 {
-    "watch": [
-        "src"
-    ],
-    "ignore": [
-        "node_modules",
-        "dist",
-        "swagger",
-        "src/routes"
-    ],
-    "ext": "ts",
-    "exec": "ts-node src/index.ts"
+  "watch": ["src"],
+  "ignore": ["node_modules", "dist", "swagger", "src/routes"],
+  "ext": "ts,html",
+  "exec": "ts-node src/index.ts"
 }

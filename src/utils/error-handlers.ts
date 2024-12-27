@@ -1,3 +1,6 @@
+import { NextFunction, Request, Response } from 'express';
+import { ValidateError } from 'tsoa';
+
 export interface ErrorResponse<T> {
   message: string;
   details?: T;
@@ -28,7 +31,7 @@ export class ValidationError extends Error {
     } else {
       message = 'Unknown error';
     }
-    super(`Validation error: ${message}`);
+    super(message);
     if (details) this._details = { constraints: details };
   }
 
@@ -77,3 +80,35 @@ export class ServiceError extends Error {
     this.message = message;
   }
 }
+
+type ErrorHandler = (
+  err: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => void;
+
+export const errorHandler: ErrorHandler = (err, req, res, next) => {
+  if (err instanceof ValidateError) {
+    res.status(422).json({
+      message: err.message || 'Validation error',
+      details: err.fields,
+    });
+  }
+
+  if (err instanceof ValidationError) {
+    res.status(422).json({ message: err.message, details: err.details });
+  }
+
+  if (err instanceof ServiceError) {
+    res.status(500).json({ message: err.message, details: err.details });
+  }
+
+  if (err instanceof Error) {
+    res.status(500).json({ message: err.message });
+  }
+
+  res.status(500).json({ message: 'Something went wrong' });
+
+  next();
+};
