@@ -874,7 +874,7 @@
   },
   "servers": [
     {
-      "url": "https://fxn-connector-prod-48a023245efe.herokuapp.com/api/v1"
+      "url": "https://data.frego.ai/api/v1"
     }
   ]
 }
