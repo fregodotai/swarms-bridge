@@ -5,10 +5,10 @@
 FREGO Swarms Bridge is a language-agnostic, cross-chain data connector enabling seamless interaction with web3 swarm protocols. Designed to bridge web2 and web3 technologies, FREGO provides developers with a standardized interface to leverage the power of agentic swarm protocols like [fxn-protocol-sdk](https://github.com/Oz-Networks/fxn-protocol-sdk).
 
 [![GitHub stars](https://img.shields.io/github/stars/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/stargazers)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/fregodotai/swarms-bridge/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/fregodotai/swarms-bridge/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/pulls)
-[![Last commit](https://img.shields.io/github/last-commit/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/commits/main)
+[![Last commit](https://img.shields.io/github/last-commit/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/commits/master)
 [![Contributors](https://img.shields.io/github/contributors/fregodotai/swarms-bridge?style=flat-square)](https://github.com/fregodotai/swarms-bridge/graphs/contributors)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
