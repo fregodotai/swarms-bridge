@@ -1,23 +1,16 @@
 # FXN Connector Documentation
 
-==========================
-
 ## Overview
 
 The FREGO swarm data connector provides a language-agnostic web2/web3 native interface for web3 swarm protocols such as [fxn-protocol-sdk](https://github.com/Oz-Networks/fxn-protocol-sdk).
 
 With this API, developers can:
 
-- Leverage JS SDK Features: Access and utilize all SDK functionalities through a standardized API.
-- Cross-Language Compatibility: Simplify integration in diverse environments like Python, Java, Ruby, or any language that supports HTTP.
-- Effortless Integration: Minimize the complexity of incorporating advanced features into non-JavaScript projects.
+- Access and utilize web3 SDK functionalities through a standardized web2 API.
 
-## fxn-protocol-sdk Documentation
 
----
-
-### Github
-
+## Current supported protocols:
+### FXN
 - [fxn-protocol-sdk](https://github.com/Oz-Networks/fxn-protocol-sdk)
 
 ## API Documentation
