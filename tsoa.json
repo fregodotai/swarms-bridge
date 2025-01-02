@@ -7,7 +7,7 @@
     "spec": {
         "outputDirectory": "./swagger",
         "specVersion": 3,
-        "host": "fxn-connector-prod-48a023245efe.herokuapp.com",
+        "host": "data.frego.ai",
         "basePath": "/api/v1",
         "json": true,
         "schemes": [
