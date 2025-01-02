@@ -9,7 +9,7 @@
         margin: 0;
         padding: 0;
         font-family: 'Arial', sans-serif;
-        background-color: #1e1e1e;
+        background-color: #000;
         color: #f7f7f7;
         display: flex;
         justify-content: center;
@@ -19,404 +19,641 @@
         overflow: auto;
       }
 
-      .container {
-        background-color: #2d2d2d;
-        border-radius: 12px;
-        padding: 20px 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        max-width: 800px;
-        margin: 20px;
-        text-align: left;
-      }
-
-      h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-      }
-
-      h2 {
-        font-size: 20px;
-        margin-top: 20px;
-      }
-
-      p,
-      li {
-        font-size: 16px;
-        margin-bottom: 10px;
-        color: #c2c2c2;
-        line-height: 1.5;
-      }
-      div {
-        font-size: 16px;
-        color: #c2c2c2;
-        line-height: 1.5;
-      }
-
-      b {
-        color: #fff;
-      }
-
-      a {
-        color: #00aaff;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      pre {
-        background-color: #1e1e1e;
-        padding: 10px;
-        border-radius: 6px;
+      .QkQOb {
+        padding: 32px;
         overflow: auto;
-        color: #eaeaea;
-        font-size: 14px;
+        border: 1px solid #30363d;
+        max-width: 1012px;
+        margin: 20px;
+        border-radius: 6px;
+        background-color: #0d1117;
       }
-
-      code {
-        font-family: monospace;
-        background-color: #1e1e1e;
-        padding: 4px 6px;
-        border-radius: 8px;
-        color: #fff;
+      .markdown-body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans',
+          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+        font-size: 16px;
+        line-height: 1.5;
+        word-wrap: break-word;
       }
-
-      code a {
-        text-decoration: underline;
-        color: #fff;
-        transition: all 0.3s ease-in-out;
+      .markdown-heading {
+        position: relative;
       }
-
-      code a:hover {
-        color: #00aaff;
+      .markdown-body blockquote {
+        padding: 0 1em;
+        color: #9198a1;
+        border-left: 0.25em solid #3d444d;
+        margin-left: 0;
+      }
+      .markdown-body p,
+      .markdown-body blockquote,
+      .markdown-body ul,
+      .markdown-body ol,
+      .markdown-body dl,
+      .markdown-body table,
+      .markdown-body pre,
+      .markdown-body details {
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      .markdown-body blockquote > :last-child {
+        margin-bottom: 0;
+      }
+      .markdown-body blockquote > :first-child {
+        margin-top: 0;
+      }
+      a {
+        color: #4493f8;
+      }
+      .markdown-body h1,
+      .markdown-body h2,
+      .markdown-body h3,
+      .markdown-body h4,
+      .markdown-body h5,
+      .markdown-body h6 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        padding-bottom: 0.3em;
+        font-size: 1.5em;
+        border-bottom: 1px solid #3d444db3;
+      }
+      .markdown-heading h1.heading-element + .anchor,
+      .markdown-heading h2.heading-element + .anchor {
+        transform: translateY(calc(-50% - 0.3rem));
+      }
+      .markdown-heading .anchor {
+        position: absolute;
+        top: 50%;
+        left: -28px;
+        display: flex;
+        width: 28px;
+        height: 28px;
+        margin: auto;
+        border-radius: var(--borderRadius-medium);
+        opacity: 0;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+      }
+      .markdown-body .anchor {
+        float: left;
+        padding-right: var(--base-size-4);
+        margin-left: -20px;
+        line-height: 1;
+      }
+      h1:first-child {
+        margin-top: 0;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>FXN Controller Documentation</h1>
-
-      <h2>Overview</h2>
-      <p>
-        Our API acts as a versatile bridge, enabling seamless integration of
-        <a href="https://github.com/Oz-Networks/fxn-protocol-sdk"
-          >fxn-protocol-sdk</a
-        >
-        JavaScript SDK with other programming languages, such as Python. It
-        provides a language-agnostic interface, allowing developers to harness
-        the capabilities of the JS SDK without being constrained by its native
-        environment.
-      </p>
-
-      <p>With this API, developers can:</p>
-      <ul>
-        <li>
-          Leverage JS SDK Features: Access and utilize all SDK functionalities
-          through a standardized API.
-        </li>
-        <li>
-          Cross-Language Compatibility: Simplify integration in diverse
-          environments like Python, Java, Ruby, or any language that supports
-          HTTP.
-        </li>
-        <li>
-          Effortless Integration: Minimize the complexity of incorporating
-          advanced features into non-JavaScript projects.
-        </li>
-      </ul>
-
-      <h2>fxn-protocol-sdk Documentation</h2>
-      <h3>Github</h3>
-      <ul>
-        <li>
+    <div
+      class="Box-sc-g0xbh4-0 QkQOb js-snippet-clipboard-copy-unpositioned undefined"
+      data-hpc="true"
+    >
+      <article class="markdown-body entry-content container-lg" itemprop="text">
+        <div class="markdown-heading" dir="auto">
+          <h1 tabindex="-1" class="heading-element" dir="auto">
+            FREGO Swarms Bridge
+          </h1>
+          <a
+            id="user-content-frego-swarms-bridge"
+            class="anchor"
+            aria-label="Permalink: FREGO Swarms Bridge"
+            href="#frego-swarms-bridge"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <blockquote>
+          <p dir="auto">Cross-chain agentic swarms data feed and interaction</p>
+        </blockquote>
+        <p dir="auto">
+          FREGO Swarms Bridge is a language-agnostic, cross-chain data connector
+          enabling seamless interaction with web3 swarm protocols. Designed to
+          bridge web2 and web3 technologies, FREGO provides developers with a
+          standardized interface to leverage the power of agentic swarm
+          protocols like
           <a href="https://github.com/Oz-Networks/fxn-protocol-sdk"
             >fxn-protocol-sdk</a
+          >.
+        </p>
+        <p dir="auto">
+          <a href="https://github.com/fregodotai/swarms-bridge/stargazers"
+            ><img
+              src="https://camo.githubusercontent.com/17e925c0c9efc3acc30a59b532f9c340d1cbeb968a0eae753fe0dea0ee98b74b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f667265676f646f7461692f737761726d732d6272696467653f7374796c653d666c61742d737175617265"
+              alt="GitHub stars"
+              data-canonical-src="https://img.shields.io/github/stars/fregodotai/swarms-bridge?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+          <a
+            href="https://github.com/fregodotai/swarms-bridge/blob/master/LICENSE.md"
+            ><img
+              src="https://camo.githubusercontent.com/cd0bfc1f47fd7a02efde25ce2186a8fdf66484289931c5528cc3f728cd6006be/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d626c75653f7374796c653d666c61742d737175617265"
+              alt="License"
+              data-canonical-src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+          <a href="https://github.com/fregodotai/swarms-bridge/issues"
+            ><img
+              src="https://camo.githubusercontent.com/2c3ea6daf0b96b9acf97e58eb2cda07875fb5ae4b8c599f0103655127edd9ec2/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732f667265676f646f7461692f737761726d732d6272696467653f7374796c653d666c61742d737175617265"
+              alt="GitHub issues"
+              data-canonical-src="https://img.shields.io/github/issues/fregodotai/swarms-bridge?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+          <a href="https://github.com/fregodotai/swarms-bridge/pulls"
+            ><img
+              src="https://camo.githubusercontent.com/b31643e19476ccfa08ceb70e540214c6d2d2e222645d4328344b185676df42de/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6973737565732d70722f667265676f646f7461692f737761726d732d6272696467653f7374796c653d666c61742d737175617265"
+              alt="GitHub pull requests"
+              data-canonical-src="https://img.shields.io/github/issues-pr/fregodotai/swarms-bridge?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+          <a href="https://github.com/fregodotai/swarms-bridge/commits/master"
+            ><img
+              src="https://camo.githubusercontent.com/344953b2cd3e388409935e4d23a8617f54ec8510bdd1cfb70ca7d79ea81c8728/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6173742d636f6d6d69742f667265676f646f7461692f737761726d732d6272696467653f7374796c653d666c61742d737175617265"
+              alt="Last commit"
+              data-canonical-src="https://img.shields.io/github/last-commit/fregodotai/swarms-bridge?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+          <a
+            href="https://github.com/fregodotai/swarms-bridge/graphs/contributors"
+            ><img
+              src="https://camo.githubusercontent.com/1419e04f84ababe285092593fdb4b31ac5f071eb1ce5f61a1273bcd8ee080237/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732f667265676f646f7461692f737761726d732d6272696467653f7374796c653d666c61742d737175617265"
+              alt="Contributors"
+              data-canonical-src="https://img.shields.io/github/contributors/fregodotai/swarms-bridge?style=flat-square"
+              style="max-width: 100%"
+          /></a>
+        </p>
+        <p dir="auto">
+          <a
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            href="https://camo.githubusercontent.com/c7b58a97508faa15b66a36989361783eaaefbdb3e73628f15de86e8ef59e8a9d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970655363726970742d3331373843363f7374796c653d666c61742d737175617265266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465"
+            ><img
+              src="https://camo.githubusercontent.com/c7b58a97508faa15b66a36989361783eaaefbdb3e73628f15de86e8ef59e8a9d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970655363726970742d3331373843363f7374796c653d666c61742d737175617265266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465"
+              alt="TypeScript"
+              data-canonical-src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white"
+              style="max-width: 100%"
+          /></a>
+          <a
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            href="https://camo.githubusercontent.com/5e00933b362c873ceae538c9e8a5904aa8117485c7e6085c854c0536c0a79dd2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536f6c616e612d3134463139353f7374796c653d666c61742d737175617265266c6f676f3d736f6c616e61266c6f676f436f6c6f723d776869746526636f6c6f723d626c61636b"
+            ><img
+              src="https://camo.githubusercontent.com/5e00933b362c873ceae538c9e8a5904aa8117485c7e6085c854c0536c0a79dd2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536f6c616e612d3134463139353f7374796c653d666c61742d737175617265266c6f676f3d736f6c616e61266c6f676f436f6c6f723d776869746526636f6c6f723d626c61636b"
+              alt="Solana"
+              data-canonical-src="https://img.shields.io/badge/Solana-14F195?style=flat-square&amp;logo=solana&amp;logoColor=white&amp;color=black"
+              style="max-width: 100%"
+          /></a>
+        </p>
+        <p dir="auto">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/fregodotai/swarms-bridge/raw/master/Cover.png"
+            ><img
+              src="https://github.com/fregodotai/swarms-bridge/raw/master/Cover.png"
+              alt="Cover"
+              style="max-width: 100%"
+          /></a>
+        </p>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">Features</h2>
+          <a
+            id="user-content-features"
+            class="anchor"
+            aria-label="Permalink: Features"
+            href="#features"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul dir="auto">
+          <li>
+            Cross-Chain Compatibility: Interact with multiple blockchains
+            through standardized APIs
+          </li>
+          <li>Real-Time Data: Access live on-chain and off-chain swarm data</li>
+          <li>
+            Developer Friendly: Language-agnostic design with web2 friendly APIs
+          </li>
+          <li>
+            Free to Use Public Deployment:
+            <a href="https://data.frego.ai" rel="nofollow">Hosted here</a>
+          </li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">
+            Supported Protocols:
+          </h2>
+          <a
+            id="user-content-supported-protocols"
+            class="anchor"
+            aria-label="Permalink: Supported Protocols:"
+            href="#supported-protocols"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <div class="markdown-heading" dir="auto">
+          <h3 tabindex="-1" class="heading-element" dir="auto">FXN</h3>
+          <a
+            id="user-content-fxn"
+            class="anchor"
+            aria-label="Permalink: FXN"
+            href="#fxn"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul dir="auto">
+          <li>
+            <a href="https://github.com/Oz-Networks/fxn-protocol-sdk"
+              >fxn-protocol-sdk</a
+            >
+          </li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">Roadmap</h2>
+          <a
+            id="user-content-roadmap"
+            class="anchor"
+            aria-label="Permalink: Roadmap"
+            href="#roadmap"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <p dir="auto">
+          We aim to establish FREGO Swarms Bridge as the go-to interface for
+          agentic swarm data interactions across chains. Our focus is on
+          enhancing data transparency to maximize developer ability to use,
+          measure, and draw insights from web3 agentic swarms.
+        </p>
+        <div class="markdown-heading" dir="auto">
+          <h3 tabindex="-1" class="heading-element" dir="auto">
+            Near-term (1-2 months)
+          </h3>
+          <a
+            id="user-content-near-term-1-2-months"
+            class="anchor"
+            aria-label="Permalink: Near-term (1-2 months)"
+            href="#near-term-1-2-months"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul class="contains-task-list">
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+              checked=""
+            />
+            Setup public API backend service
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+              checked=""
+            />
+            v1/base FXN integration
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Setup instructions and example integrations
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Clearer contribution rules
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Integrate with Frego Launchpad web3 auth service
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            API key management via Frego Launchpad webapp
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            API key based abstraction for FXN protocol access
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            New web2 friendly API endpoints for protocol usage
+          </li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h3 tabindex="-1" class="heading-element" dir="auto">Later</h3>
+          <a
+            id="user-content-later"
+            class="anchor"
+            aria-label="Permalink: Later"
+            href="#later"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul class="contains-task-list">
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Install via npm
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Eliza connector
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Zerepy connector
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Swarms data agent interface
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            v1/base TAO integration
+          </li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h3 tabindex="-1" class="heading-element" dir="auto">Long term</h3>
+          <a
+            id="user-content-long-term"
+            class="anchor"
+            aria-label="Permalink: Long term"
+            href="#long-term"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul class="contains-task-list">
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Frontend dashboard webapp w/ auth
+          </li>
+          <li class="task-list-item">
+            <input
+              type="checkbox"
+              id=""
+              disabled=""
+              class="task-list-item-checkbox"
+            />
+            Automated cross-framework risk assement
+          </li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">
+            API Documentation
+          </h2>
+          <a
+            id="user-content-api-documentation"
+            class="anchor"
+            aria-label="Permalink: API Documentation"
+            href="#api-documentation"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <p dir="auto">
+          Access the
+          <a href="https://data.frego.ai/api-docs/" rel="nofollow"
+            >Swagger API documentation</a
           >
-        </li>
-      </ul>
-      <h3>Web</h3>
-      <ul>
-        <li><a href="https://docs.fxn.world/">Introduction</a></li>
-        <li><a href="https://docs.fxn.world/key-concepts">Key Concepts</a></li>
-        <li>
-          <a href="https://docs.fxn.world/brand-guidelines">Brand Guidelines</a>
-        </li>
-        <li>
-          <a href="https://docs.fxn.world/developers/quick-start"
-            >Quick Start</a
-          >
-        </li>
-        <li><a href="https://docs.fxn.world/faq">FAQ</a></li>
-      </ul>
-
-      <h2>API Documentation</h2>
-      <p>
-        Access the
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/"
-          >Swagger UI documentation</a
-        >
-        to explore available endpoints and test API requests.
-      </p>
-
-      <h3>Endpoints</h3>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/SetDataProviderFee"
-        >
-          Set a Fee for Data Provider
-        </a>
-      </h4>
-      <p>Sets the data provider fee for a subscription.</p>
-      <div>Method: <b>POST</b></div>
-      <div>Path: <b>/data-provider-fee</b></div>
-      <div>Request Body:</div>
-      <ul>
-        <li><code>dataProviderFee</code>: The new data provider fee.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>transactionSignature</code>: The signature of the transaction.
-        </li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/CreateSubscription"
-        >
-          Create Subscription
-        </a>
-      </h4>
-      <p>Creates a new subscription.</p>
-      <div>Method: <b>POST</b></div>
-      <div>Path: <b>/create-subscription</b></div>
-      <div>Request Body:</div>
-      <ul>
-        <li><code>dataProvider</code>: The data provider address.</li>
-        <li><code>recipient</code>: The recipient address.</li>
-        <li><code>durationInDays</code>: The duration of the subscription.</li>
-        <li><code>nftTokenAccount</code>: The NFT token account.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>transactionSignature</code>: The signature of the transaction.
-        </li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionStatus"
-        >
-          Get Subscription Status
-        </a>
-      </h4>
-      <p>Gets the status of a subscription.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-subscription-status</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>endTime</code>: The end time of the subscription.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>subscriptionStatus</code>: The status of the subscription.
-        </li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetProviderTokenAccount"
-        >
-          Get Provider Token Account
-        </a>
-      </h4>
-      <p>Gets the token account of a provider.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-provider-token-account</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>providerAddress</code>: The address of the provider.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li><code>tokenAccount</code>: The token account of the provider.</li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionsForProvider"
-        >
-          Get Subscriptions for Provider
-        </a>
-      </h4>
-      <p>Gets the subscriptions for a provider.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-subscriptions-for-provider</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>providerPublicKey</code>: The public key of the provider.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li><code>subscriptions</code>: The subscriptions for the provider.</li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetAllSubscriptionsForUser"
-        >
-          Get All Subscriptions for User
-        </a>
-      </h4>
-      <p>Gets all subscriptions for a user.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-subscriptions-for-user</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>userPublicKey</code>: The public key of the user.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li><code>subscriptions</code>: The subscriptions for the user.</li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/RenewSubscription"
-        >
-          Renew Subscription
-        </a>
-      </h4>
-      <p>Renews a subscription.</p>
-      <div>Method: <b>POST</b></div>
-      <div>Path: <b>/renew-subscription</b></div>
-      <div>Request Body:</div>
-      <ul>
-        <li><code>dataProvider</code>: The data provider address.</li>
-        <li><code>newRecipient</code>: The new recipient address.</li>
-        <li><code>newEndTime</code>: The new end time.</li>
-        <li><code>qualityScore</code>: The quality score.</li>
-        <li><code>nftTokenAccount</code>: The NFT token account.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>transactionSignature</code>: The signature of the transaction.
-        </li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/CancelSubscription"
-        >
-          Cancel Subscription
-        </a>
-      </h4>
-      <p>Cancels a subscription.</p>
-      <div>Method: <b>POST</b></div>
-      <div>Path: <b>/cancel-subscription</b></div>
-      <div>Request Body:</div>
-      <ul>
-        <li><code>dataProvider</code>: The data provider address.</li>
-        <li><code>qualityScore</code>: The quality score.</li>
-        <li><code>nftTokenAccount</code>: The NFT token account.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>transactionSignature</code>: The signature of the transaction.
-        </li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetSubscriptionState"
-        >
-          Get Subscription State
-        </a>
-      </h4>
-      <p>Gets the state of a subscription.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-subscription-state</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li>
-          <code>subscriptionPDA</code>: The program address of the subscription
-          PDA.
-        </li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li><code>recipient</code>: The recipient of the subscription.</li>
-        <li><code>endTime</code>: The end time of the subscription.</li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetQualityInfo"
-        >
-          Get Quality Info
-        </a>
-      </h4>
-      <p>Gets the quality score of a data provider.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-quality-info</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>dataProvider</code>: The data provider address.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li>
-          <code>qualities</code>: The quality scores of the data provider.
-        </li>
-        <li>
-          <code>currentIndex</code>: The index of the current quality score.
-        </li>
-        <li><code>quality</code>: The current quality score.</li>
-        <li><code>subscriber</code>: The subscriber of the data provider.</li>
-      </ul>
-
-      <h4>
-        <a
-          href="https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/#/FXN/GetProgramAddress"
-        >
-          Get Program Address
-        </a>
-      </h4>
-      <p>Gets the program address of the FXN protocol.</p>
-      <div>Method: <b>GET</b></div>
-      <div>Path: <b>/get-program-address</b></div>
-      <div>Query Parameters:</div>
-      <ul>
-        <li><code>dataProvider</code>: The data provider address.</li>
-        <li><code>subscriber</code>: The subscriber address.</li>
-      </ul>
-      <div>Response:</div>
-      <ul>
-        <li><code>statePDA</code>: The program address of the state PDA.</li>
-        <li>
-          <code>qualityPDA</code>: The program address of the quality PDA.
-        </li>
-        <li>
-          <code>subscriptionPDA</code>: The program address of the subscription
-          PDA.
-        </li>
-        <li>
-          <code>subscribersListPDA</code>: The program address of the
-          subscribers list PDA.
-        </li>
-        <li>
-          <code>dataProviderFeePDA</code>: The program address of the data
-          provider fee PDA.
-        </li>
-      </ul>
+          to explore available endpoints and test API requests.
+        </p>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">Contributing</h2>
+          <a
+            id="user-content-contributing"
+            class="anchor"
+            aria-label="Permalink: Contributing"
+            href="#contributing"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <p dir="auto">
+          We welcome contributions from the community! To contribute:
+        </p>
+        <ul dir="auto">
+          <li>Fork the repository</li>
+          <li>
+            Create your feature branch (git checkout -b feature/YourFeature)
+          </li>
+          <li>Commit your changes (git commit -m 'Made a cool new feature')</li>
+          <li>Push to the branch (git push origin feature/YourFeature)</li>
+          <li>Open a Pull Request</li>
+        </ul>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">License</h2>
+          <a
+            id="user-content-license"
+            class="anchor"
+            aria-label="Permalink: License"
+            href="#license"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <p dir="auto">
+          This project is licensed under the MIT License - see the LICENSE file
+          for details.
+        </p>
+        <div class="markdown-heading" dir="auto">
+          <h2 tabindex="-1" class="heading-element" dir="auto">Support</h2>
+          <a
+            id="user-content-support"
+            class="anchor"
+            aria-label="Permalink: Support"
+            href="#support"
+            ><svg
+              class="octicon octicon-link"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"
+              ></path></svg
+          ></a>
+        </div>
+        <ul dir="auto">
+          <li>
+            <a href="https://links.frego.ai" rel="nofollow">Links page</a>
+          </li>
+        </ul>
+      </article>
     </div>
   </body>
 </html>
