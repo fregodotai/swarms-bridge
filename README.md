@@ -1,4 +1,4 @@
-# FXN Connector Documentation
+# Swarms bridge documentation
 
 ## Overview
 
