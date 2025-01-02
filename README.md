@@ -15,4 +15,4 @@ With this API, developers can:
 
 ## API Documentation
 
-Access the [Swagger UI documentation](https://fxn-connector-prod-48a023245efe.herokuapp.com/api-docs/) to explore available endpoints and test API requests.
+Access the [Swagger UI documentation](https://data.frego.ai/api-docs/) to explore available endpoints and test API requests.
