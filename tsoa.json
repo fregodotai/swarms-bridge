@@ -1,22 +1,18 @@
 {
-    "entryFile": "src/index.ts",
-    "noImplicitAdditionalProperties": "throw-on-extras",
-    "controllerPathGlobs": [
-        "src/**/*.controller.ts"
-    ],
-    "spec": {
-        "outputDirectory": "./swagger",
-        "specVersion": 3,
-        "host": "data.frego.ai",
-        "basePath": "/api/v1",
-        "json": true,
-        "schemes": [
-            "https"
-        ]
-    },
-    "routes": {
-        "basePath": "/api/v1",
-        "routesDir": "./src/routes",
-        "middleware": "express"
-    }
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/*.controller.ts"],
+  "spec": {
+    "outputDirectory": "./swagger",
+    "specVersion": 3,
+    "host": "data.frego.ai",
+    "basePath": "/api/v1",
+    "json": true,
+    "schemes": ["https"]
+  },
+  "routes": {
+    "basePath": "/api/v1",
+    "routesDir": "./src/routes",
+    "middleware": "express"
+  }
 }
