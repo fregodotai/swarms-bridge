@@ -311,7 +311,7 @@
     "securitySchemes": {}
   },
   "info": {
-    "title": "fxn-connector",
+    "title": "swarms-bridge",
     "version": "1.0.0",
     "license": {
       "name": "ISC"
