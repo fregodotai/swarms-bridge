@@ -1,880 +1,1097 @@
 {
-  "openapi": "3.0.0",
-  "components": {
-    "examples": {},
-    "headers": {},
-    "parameters": {},
-    "requestBodies": {},
-    "responses": {},
-    "schemas": {
-      "TransactionSignature": {
-        "type": "string",
-        "description": "Transaction signature as base-58 encoded string"
-      },
-      "TransactionSignatureResponse": {
-        "properties": {
-          "transactionSignature": {
-            "$ref": "#/components/schemas/TransactionSignature"
-          }
-        },
-        "required": ["transactionSignature"],
-        "type": "object"
-      },
-      "IServiceError": {
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "reason": {
-            "type": "string"
-          }
-        },
-        "required": ["message", "reason"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "ErrorResponse_IServiceError_": {
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "details": {
-            "$ref": "#/components/schemas/IServiceError"
-          }
-        },
-        "required": ["message"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "IValidationError": {
-        "properties": {
-          "constraints": {}
-        },
-        "required": ["constraints"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "ErrorResponse_IValidationError_": {
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "details": {
-            "$ref": "#/components/schemas/IValidationError"
-          }
-        },
-        "required": ["message"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "DataProviderFeeRequestDto": {
-        "properties": {
-          "fee": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": ["fee"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "CreateSubscriptionRequestDto": {
-        "properties": {
-          "dataProvider": {
-            "type": "string"
-          },
-          "recipient": {
-            "type": "string"
-          },
-          "durationInDays": {
-            "type": "number",
-            "format": "double"
-          },
-          "nftTokenAccount": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "dataProvider",
-          "recipient",
-          "durationInDays",
-          "nftTokenAccount"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetSubscriptionStatusResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["active", "expired", "expiring_soon"]
-          }
-        },
-        "required": ["status"],
-        "type": "object"
-      },
-      "GetProviderTokenAccountResponse": {
-        "properties": {
-          "tokenAccount": {
-            "type": "string"
-          }
-        },
-        "required": ["tokenAccount"],
-        "type": "object"
-      },
-      "PublicKey": {
-        "type": "string",
-        "description": "A public key"
-      },
-      "SubscriptionAccount": {
-        "properties": {
-          "endTime": {
-            "type": "number",
-            "format": "double"
-          },
-          "recipient": {
-            "type": "string"
-          }
-        },
-        "required": ["endTime", "recipient"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "SubscriberDetails": {
-        "properties": {
-          "subscriber": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "subscriptionPDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "subscription": {
-            "$ref": "#/components/schemas/SubscriptionAccount"
-          },
-          "status": {
-            "type": "string",
-            "enum": ["active", "expired", "expiring_soon"]
-          }
-        },
-        "required": ["subscriber", "subscriptionPDA", "subscription", "status"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetSubscriberDetailsResponse": {
-        "properties": {
-          "subscriptions": {
-            "items": {
-              "$ref": "#/components/schemas/SubscriberDetails"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["subscriptions"],
-        "type": "object"
-      },
-      "SubscriptionStatus": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["active", "expired", "expiring_soon"]
-          },
-          "subscription": {
-            "$ref": "#/components/schemas/SubscriptionAccount"
-          }
-        },
-        "required": ["status", "subscription"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetAllSubscriptionsResponse": {
-        "properties": {
-          "subscriptions": {
-            "items": {
-              "$ref": "#/components/schemas/SubscriptionStatus"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["subscriptions"],
-        "type": "object"
-      },
-      "RenewSubscriptionRequestDto": {
-        "properties": {
-          "dataProvider": {
-            "type": "string"
-          },
-          "newRecipient": {
-            "type": "string"
-          },
-          "newEndTime": {
-            "type": "number",
-            "format": "double"
-          },
-          "qualityScore": {
-            "type": "number",
-            "format": "double"
-          },
-          "nftTokenAccount": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "dataProvider",
-          "newRecipient",
-          "newEndTime",
-          "qualityScore",
-          "nftTokenAccount"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "CancelSubscriptionRequestDto": {
-        "properties": {
-          "dataProvider": {
-            "type": "string"
-          },
-          "qualityScore": {
-            "type": "number",
-            "format": "double"
-          },
-          "nftTokenAccount": {
-            "type": "string"
-          }
-        },
-        "required": ["dataProvider", "qualityScore"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetSubscriptionStateResponse": {
-        "properties": {
-          "recipient": {
-            "type": "string"
-          },
-          "endTime": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": ["recipient", "endTime"],
-        "type": "object"
-      },
-      "GetQualityInfoResponse": {
-        "properties": {
-          "qualities": {
-            "items": {},
-            "type": "array"
-          },
-          "currentIndex": {
-            "type": "number",
-            "format": "double"
-          },
-          "quality": {
-            "type": "number",
-            "format": "double"
-          },
-          "subscriber": {
-            "$ref": "#/components/schemas/PublicKey"
-          }
-        },
-        "required": ["qualities", "currentIndex", "quality", "subscriber"],
-        "type": "object"
-      },
-      "ProgramAddressResponse": {
-        "properties": {
-          "statePDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "qualityPDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "subscriptionPDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "subscribersListPDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          },
-          "dataProviderFeePDA": {
-            "$ref": "#/components/schemas/PublicKey"
-          }
-        },
-        "required": [
-          "statePDA",
-          "qualityPDA",
-          "subscriptionPDA",
-          "subscribersListPDA",
-          "dataProviderFeePDA"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      }
-    },
-    "securitySchemes": {}
-  },
-  "info": {
-    "title": "swarms-bridge",
-    "version": "1.0.0",
-    "license": {
-      "name": "ISC"
-    },
-    "contact": {}
-  },
-  "paths": {
-    "/fxn/data-provider-fee": {
-      "post": {
-        "operationId": "SetDataProviderFee",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionSignatureResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataProviderFeeRequestDto"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fxn/create-subscription": {
-      "post": {
-        "operationId": "CreateSubscription",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionSignatureResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSubscriptionRequestDto"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fxn/get-subscription-status": {
-      "get": {
-        "operationId": "GetSubscriptionStatus",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSubscriptionStatusResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "endTime",
-            "required": true,
-            "schema": {
-              "format": "double",
-              "type": "number"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-provider-token-account": {
-      "get": {
-        "operationId": "GetProviderTokenAccount",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetProviderTokenAccountResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "providerAddress",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-subscriptions-for-provider": {
-      "get": {
-        "operationId": "GetSubscriptionsForProvider",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSubscriberDetailsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "providerPublicKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-subscriptions-for-user": {
-      "get": {
-        "operationId": "GetAllSubscriptionsForUser",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAllSubscriptionsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "providerPublicKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/renew-subscription": {
-      "post": {
-        "operationId": "RenewSubscription",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionSignatureResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RenewSubscriptionRequestDto"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fxn/cancel-subscription": {
-      "post": {
-        "operationId": "CancelSubscription",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionSignatureResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelSubscriptionRequestDto"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fxn/get-subscription-state": {
-      "get": {
-        "operationId": "GetSubscriptionState",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetSubscriptionStateResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "subscriptionPDA",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-quality-info": {
-      "get": {
-        "operationId": "GetQualityInfo",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetQualityInfoResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "dataProvider",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-program-addresses": {
-      "get": {
-        "operationId": "GetProgramAddresses",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProgramAddressResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "dataProvider",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "subscriber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "https://data.frego.ai/api/v1"
-    }
-  ]
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"TransactionSignature": {
+				"type": "string",
+				"description": "Transaction signature as base-58 encoded string"
+			},
+			"TransactionSignatureResponse": {
+				"properties": {
+					"transactionSignature": {
+						"$ref": "#/components/schemas/TransactionSignature"
+					}
+				},
+				"required": [
+					"transactionSignature"
+				],
+				"type": "object"
+			},
+			"IServiceError": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"reason": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message",
+					"reason"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse_IServiceError_": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"details": {
+						"$ref": "#/components/schemas/IServiceError"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IValidationError": {
+				"properties": {
+					"constraints": {}
+				},
+				"required": [
+					"constraints"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse_IValidationError_": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"details": {
+						"$ref": "#/components/schemas/IValidationError"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DataProviderFeeRequestDto": {
+				"properties": {
+					"fee": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"fee"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateSubscriptionRequestDto": {
+				"properties": {
+					"dataProvider": {
+						"type": "string"
+					},
+					"recipient": {
+						"type": "string"
+					},
+					"durationInDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"nftTokenAccount": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"dataProvider",
+					"recipient",
+					"durationInDays",
+					"nftTokenAccount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetSubscriptionStatusResponse": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"enum": [
+							"active",
+							"expired",
+							"expiring_soon"
+						]
+					}
+				},
+				"required": [
+					"status"
+				],
+				"type": "object"
+			},
+			"GetProviderTokenAccountResponse": {
+				"properties": {
+					"tokenAccount": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"tokenAccount"
+				],
+				"type": "object"
+			},
+			"PublicKey": {
+				"type": "string",
+				"description": "A public key"
+			},
+			"SubscriptionAccount": {
+				"properties": {
+					"endTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"recipient": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"endTime",
+					"recipient"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SubscriberDetails": {
+				"properties": {
+					"subscriber": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"subscriptionPDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"subscription": {
+						"$ref": "#/components/schemas/SubscriptionAccount"
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"active",
+							"expired",
+							"expiring_soon"
+						]
+					}
+				},
+				"required": [
+					"subscriber",
+					"subscriptionPDA",
+					"subscription",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetSubscriberDetailsResponse": {
+				"properties": {
+					"subscriptions": {
+						"items": {
+							"$ref": "#/components/schemas/SubscriberDetails"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"subscriptions"
+				],
+				"type": "object"
+			},
+			"SubscriptionStatus": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"enum": [
+							"active",
+							"expired",
+							"expiring_soon"
+						]
+					},
+					"subscription": {
+						"$ref": "#/components/schemas/SubscriptionAccount"
+					}
+				},
+				"required": [
+					"status",
+					"subscription"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetAllSubscriptionsResponse": {
+				"properties": {
+					"subscriptions": {
+						"items": {
+							"$ref": "#/components/schemas/SubscriptionStatus"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"subscriptions"
+				],
+				"type": "object"
+			},
+			"RenewSubscriptionRequestDto": {
+				"properties": {
+					"dataProvider": {
+						"type": "string"
+					},
+					"newRecipient": {
+						"type": "string"
+					},
+					"newEndTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"qualityScore": {
+						"type": "number",
+						"format": "double"
+					},
+					"nftTokenAccount": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"dataProvider",
+					"newRecipient",
+					"newEndTime",
+					"qualityScore",
+					"nftTokenAccount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CancelSubscriptionRequestDto": {
+				"properties": {
+					"dataProvider": {
+						"type": "string"
+					},
+					"qualityScore": {
+						"type": "number",
+						"format": "double"
+					},
+					"nftTokenAccount": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"dataProvider",
+					"qualityScore"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetSubscriptionStateResponse": {
+				"properties": {
+					"recipient": {
+						"type": "string"
+					},
+					"endTime": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"recipient",
+					"endTime"
+				],
+				"type": "object"
+			},
+			"GetQualityInfoResponse": {
+				"properties": {
+					"qualities": {
+						"items": {},
+						"type": "array"
+					},
+					"currentIndex": {
+						"type": "number",
+						"format": "double"
+					},
+					"quality": {
+						"type": "number",
+						"format": "double"
+					},
+					"subscriber": {
+						"$ref": "#/components/schemas/PublicKey"
+					}
+				},
+				"required": [
+					"qualities",
+					"currentIndex",
+					"quality",
+					"subscriber"
+				],
+				"type": "object"
+			},
+			"ProgramAddressResponse": {
+				"properties": {
+					"statePDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"qualityPDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"subscriptionPDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"subscribersListPDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					},
+					"dataProviderFeePDA": {
+						"$ref": "#/components/schemas/PublicKey"
+					}
+				},
+				"required": [
+					"statePDA",
+					"qualityPDA",
+					"subscriptionPDA",
+					"subscribersListPDA",
+					"dataProviderFeePDA"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RegisterAgentResponse": {
+				"properties": {
+					"apiKey": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"apiKey"
+				],
+				"type": "object"
+			},
+			"RegisterAgentRequestDto": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "x-api-key",
+				"in": "header"
+			}
+		}
+	},
+	"info": {
+		"title": "swarms-bridge",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/fxn/data-provider-fee": {
+			"post": {
+				"operationId": "SetDataProviderFee",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionSignatureResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DataProviderFeeRequestDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fxn/create-subscription": {
+			"post": {
+				"operationId": "CreateSubscription",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionSignatureResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateSubscriptionRequestDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fxn/get-subscription-status": {
+			"get": {
+				"operationId": "GetSubscriptionStatus",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSubscriptionStatusResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "endTime",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/get-provider-token-account": {
+			"get": {
+				"operationId": "GetProviderTokenAccount",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetProviderTokenAccountResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "providerAddress",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/get-subscriptions-for-provider": {
+			"get": {
+				"operationId": "GetSubscriptionsForProvider",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSubscriberDetailsResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "providerPublicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/get-subscriptions-for-user": {
+			"get": {
+				"operationId": "GetAllSubscriptionsForUser",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetAllSubscriptionsResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "providerPublicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/renew-subscription": {
+			"post": {
+				"operationId": "RenewSubscription",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionSignatureResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RenewSubscriptionRequestDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fxn/cancel-subscription": {
+			"post": {
+				"operationId": "CancelSubscription",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionSignatureResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CancelSubscriptionRequestDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/fxn/get-subscription-state": {
+			"get": {
+				"operationId": "GetSubscriptionState",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSubscriptionStateResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "subscriptionPDA",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/get-quality-info": {
+			"get": {
+				"operationId": "GetQualityInfo",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetQualityInfoResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "dataProvider",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/fxn/get-program-addresses": {
+			"get": {
+				"operationId": "GetProgramAddresses",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ProgramAddressResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"FXN"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "dataProvider",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "subscriber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/auth/register-agent": {
+			"post": {
+				"operationId": "RegisterAgent",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegisterAgentResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RegisterAgentRequestDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/test-api-key": {
+			"get": {
+				"operationId": "TestApiKey",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Service error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://data.frego.ai/api/v1"
+		}
+	]
 }

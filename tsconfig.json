@@ -17,7 +17,7 @@
     "incremental": true,
     "declarationMap": true,
     "target": "ES6",
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["src/types", "./node_modules/@types"]
   },
   "include": ["src/**/*.ts", "eslint.config.mjs", "ecosystem.config.ts"],
   "exclude": ["node_modules", "dist", "**/*spec.ts", "**/*unit.ts"]

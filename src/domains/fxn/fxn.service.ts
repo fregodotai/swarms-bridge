@@ -20,8 +20,8 @@ import {
   SubscriberDetails,
   TransactionSignatureResponse,
 } from './fxn.types';
-import config from '../config/config';
-import { ServiceError } from '../utils/error-handlers';
+import config from '../../config/config';
+import { ServiceError } from '../../utils/error-handlers';
 
 export default class FxnService {
   public provider: AnchorProvider;

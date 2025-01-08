@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from 'class-validator';
 
-import { IsSolanaPublicKey } from '../../utils/custom-validators';
+import { IsSolanaPublicKey } from '../../../utils/custom-validators';
 
 export default class RenewSubscriptionRequestDto {
   @IsSolanaPublicKey()

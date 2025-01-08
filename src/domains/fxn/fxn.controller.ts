@@ -27,17 +27,17 @@ import {
   ProgramAddressResponse,
   TransactionSignatureResponse,
 } from './fxn.types';
-import { fxnService } from '../services';
+import { fxnService } from '../../services';
+import CancelSubscriptionRequestDto from './dto/cancel-subscription-request.dto';
+import CreateSubscriptionRequestDto from './dto/create-subscription-request.dto';
+import DataProviderFeeRequestDto from './dto/data-provider-fee-request.dto';
+import RenewSubscriptionRequestDto from './dto/renew-subscription-request.dto';
+import { createModel } from '../../utils/create-model';
 import {
   ErrorResponse,
   IServiceError,
   IValidationError,
-} from '../utils/error-handlers';
-import CancelSubscriptionRequestDto from './dto/cancel-subscription-request.dto';
-import DataProviderFeeRequestDto from './dto/data-provider-fee-request.dto';
-import { createModel } from '../utils/create-model';
-import CreateSubscriptionRequestDto from './dto/create-subscription-request.dto';
-import RenewSubscriptionRequestDto from './dto/renew-subscription-request.dto';
+} from '../../utils/error-handlers';
 
 @Tags('FXN')
 @Route('fxn')

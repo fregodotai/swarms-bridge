@@ -15,6 +15,10 @@ export interface IServiceError {
   reason: string;
 }
 
+export interface IAuthenticationError {
+  message: string;
+}
+
 export const notFoundHandler = (req: any, res: any) => {
   res.status(404).json({ message: 'Route not found' });
 };
@@ -81,6 +85,35 @@ export class ServiceError extends Error {
   }
 }
 
+export class AuthenticationError extends Error {
+  private _statusCode: number;
+
+  constructor(error: unknown, statusCode: number) {
+    let message;
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === 'string') {
+      message = error;
+    } else {
+      message = 'Unknown error';
+    }
+    super(`Authentication error: ${message}`);
+    this._statusCode = statusCode;
+  }
+
+  get statusCode() {
+    return this._statusCode;
+  }
+
+  get message() {
+    return this.message;
+  }
+
+  set message(message: string) {
+    this.message = message;
+  }
+}
+
 type ErrorHandler = (
   err: unknown,
   req: Request,
@@ -94,21 +127,16 @@ export const errorHandler: ErrorHandler = (err, req, res, next) => {
       message: err.message || 'Validation error',
       details: err.fields,
     });
-  }
-
-  if (err instanceof ValidationError) {
+  } else if (err instanceof ValidationError) {
     res.status(422).json({ message: err.message, details: err.details });
-  }
-
-  if (err instanceof ServiceError) {
+  } else if (err instanceof ServiceError) {
     res.status(500).json({ message: err.message, details: err.details });
-  }
-
-  if (err instanceof Error) {
+  } else if (err instanceof AuthenticationError) {
+    res.status(err.statusCode).json({ message: err.message });
+  } else if (err instanceof Error) {
     res.status(500).json({ message: err.message });
+  } else {
+    res.status(500).json({ message: 'Something went wrong' });
+    next();
   }
-
-  res.status(500).json({ message: 'Something went wrong' });
-
-  next();
 };
