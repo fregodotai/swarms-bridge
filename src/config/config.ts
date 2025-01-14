@@ -25,6 +25,8 @@ const config = {
     port: 3306,
   },
   isProduction: process.env.NODE_ENV === 'production',
+  encryptionKey: process.env.ENCRYPTION_KEY,
+  fxnTokenCa: process.env.FXN_TOKEN_CA,
 };
 
 export default config;

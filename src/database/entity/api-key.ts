@@ -3,7 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  ManyToOne,
+  OneToOne,
 } from 'typeorm';
 
 import { Agent } from './agent';
@@ -16,7 +16,7 @@ export enum ApiKeyStatus {
 @Entity()
 export class ApiKey {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'varchar' })
   apiKey: string;
@@ -31,6 +31,6 @@ export class ApiKey {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Agent, agent => agent.id, { onDelete: 'CASCADE' })
+  @OneToOne(() => Agent, agent => agent.apiKey)
   agent: Agent;
 }

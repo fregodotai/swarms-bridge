@@ -1,4 +1,3 @@
-import express from 'express';
 import {
   Controller,
   Route,
@@ -7,9 +6,6 @@ import {
   Response,
   Post,
   Body,
-  Get,
-  Request,
-  Security,
 } from 'tsoa';
 
 import { RegisterAgentResponse } from './auth.types';
@@ -35,16 +31,5 @@ export class AuthController extends Controller {
     const model = await createModel(RegisterAgentRequestDto, agentData);
 
     return await authService.registerAgent(model);
-  }
-
-  @SuccessResponse('200')
-  @Security('api_key')
-  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
-  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
-  @Get('/test-api-key')
-  public async testApiKey(
-    @Request() request: express.Request,
-  ): Promise<{ message: string }> {
-    return { message: `Received API key for agent ${request.agent?.name}` };
   }
 }

@@ -15,7 +15,7 @@ export async function expressAuthentication(
     const keyRecord = await ApiKeyRepository.findOne({
       where: { apiKey },
       relations: {
-        agent: true,
+        agent: { wallet: true, apiKey: true },
       },
     });
 
