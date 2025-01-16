@@ -144,7 +144,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 - [Links page](https://links.frego.ai)
-
-```
-
-```
