@@ -1,5 +1,5 @@
-import { AnchorProvider, Wallet, BN } from '@coral-xyz/anchor';
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { AnchorProvider, BN } from '@coral-xyz/anchor';
+import { PublicKey } from '@solana/web3.js';
 import { SolanaAdapter } from 'fxn-protocol-sdk';
 import {
   CancelParams,
@@ -20,32 +20,13 @@ import {
   SubscriberDetails,
   TransactionSignatureResponse,
 } from './fxn.types';
-import config from '../config/config';
-import { ServiceError } from '../utils/error-handlers';
+import { ServiceError } from '../../utils/error-handlers';
 
 export default class FxnService {
-  public provider: AnchorProvider;
-  public adapter: SolanaAdapter;
+  private adapter: SolanaAdapter;
 
-  constructor() {
-    const solanaKeyPair = config.solanaKeyPair;
-
-    if (!solanaKeyPair) {
-      throw new Error(
-        'SOLANA_KEYPAIR is not set in the .env file. Please generate a keypair using "npm run generate-keypair" script.',
-      );
-    }
-    const keypairData = JSON.parse(solanaKeyPair);
-    const keypair = Keypair.fromSecretKey(Uint8Array.from(keypairData));
-
-    const rpcUrl = config.rpcUrl;
-    const connection = new Connection(rpcUrl, 'confirmed');
-
-    const wallet: Wallet = new Wallet(keypair);
-    this.provider = new AnchorProvider(connection, wallet, {
-      commitment: 'confirmed',
-    });
-    this.adapter = new SolanaAdapter(this.provider);
+  constructor(anchorProvider: AnchorProvider) {
+    this.adapter = new SolanaAdapter(anchorProvider);
   }
 
   public async setDataProviderFee(

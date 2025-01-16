@@ -306,9 +306,38 @@
         ],
         "type": "object",
         "additionalProperties": false
+      },
+      "RegisterAgentResponse": {
+        "properties": {
+          "apiKey": {
+            "type": "string"
+          }
+        },
+        "required": ["apiKey"],
+        "type": "object"
+      },
+      "RegisterAgentRequestDto": {
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name"],
+        "type": "object",
+        "additionalProperties": false
       }
     },
-    "securitySchemes": {}
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
   },
   "info": {
     "title": "swarms-bridge",
@@ -356,7 +385,17 @@
         },
         "tags": ["FXN"],
         "security": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -406,7 +445,17 @@
         },
         "tags": ["FXN"],
         "security": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -465,6 +514,15 @@
               "format": "double",
               "type": "number"
             }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -511,6 +569,15 @@
             "in": "query",
             "name": "providerAddress",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -563,6 +630,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -612,6 +688,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -653,7 +738,17 @@
         },
         "tags": ["FXN"],
         "security": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -703,7 +798,17 @@
         },
         "tags": ["FXN"],
         "security": [],
-        "parameters": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -761,6 +866,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
       }
@@ -807,6 +921,15 @@
             "in": "query",
             "name": "dataProvider",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -867,8 +990,67 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ]
+      }
+    },
+    "/auth/register-agent": {
+      "post": {
+        "operationId": "RegisterAgent",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterAgentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Auth"],
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAgentRequestDto"
+              }
+            }
+          }
+        }
       }
     }
   },

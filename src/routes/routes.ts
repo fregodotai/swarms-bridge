@@ -4,13 +4,24 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import { fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { FxnController } from './../fxn/fxn.controller';
+import { FxnController } from './../domains/fxn/fxn.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { AuthController } from './../domains/auth/auth.controller';
+import { expressAuthentication } from './../middlewares/authentication';
+// @ts-ignore - no great way to install types from subpackage
 import type {
   Request as ExRequest,
   Response as ExResponse,
   RequestHandler,
   Router,
 } from 'express';
+
+const expressAuthenticationRecasted = expressAuthentication as (
+  req: ExRequest,
+  securityName: string,
+  scopes?: string[],
+  res?: ExResponse,
+) => Promise<any>;
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -259,6 +270,24 @@ const models: TsoaRoute.Models = {
     additionalProperties: false,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  RegisterAgentResponse: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: { apiKey: { dataType: 'string', required: true } },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  RegisterAgentRequestDto: {
+    dataType: 'refObject',
+    properties: {
+      id: { dataType: 'double', required: true },
+      name: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const templateService = new ExpressTemplateService(models, {
   noImplicitAdditionalProperties: 'throw-on-extras',
@@ -277,12 +306,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     setDataProviderFeeData: {
       in: 'body',
       name: 'setDataProviderFeeData',
       required: true,
       ref: 'DataProviderFeeRequestDto',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.post(
     '/api/v1/fxn/data-provider-fee',
@@ -326,12 +357,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     createSubscriptionData: {
       in: 'body',
       name: 'createSubscriptionData',
       required: true,
       ref: 'CreateSubscriptionRequestDto',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.post(
     '/api/v1/fxn/create-subscription',
@@ -375,12 +408,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     endTime: {
       in: 'query',
       name: 'endTime',
       required: true,
       dataType: 'double',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-subscription-status',
@@ -424,12 +459,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     providerAddress: {
       in: 'query',
       name: 'providerAddress',
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-provider-token-account',
@@ -473,12 +510,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     providerPublicKey: {
       in: 'query',
       name: 'providerPublicKey',
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-subscriptions-for-provider',
@@ -522,12 +561,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     providerPublicKey: {
       in: 'query',
       name: 'providerPublicKey',
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-subscriptions-for-user',
@@ -571,12 +612,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     renewParams: {
       in: 'body',
       name: 'renewParams',
       required: true,
       ref: 'RenewSubscriptionRequestDto',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.post(
     '/api/v1/fxn/renew-subscription',
@@ -620,12 +663,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     cancelParams: {
       in: 'body',
       name: 'cancelParams',
       required: true,
       ref: 'CancelSubscriptionRequestDto',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.post(
     '/api/v1/fxn/cancel-subscription',
@@ -669,12 +714,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     subscriptionPDA: {
       in: 'query',
       name: 'subscriptionPDA',
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-subscription-state',
@@ -718,12 +765,14 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     dataProvider: {
       in: 'query',
       name: 'dataProvider',
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-quality-info',
@@ -765,6 +814,7 @@ export function RegisterRoutes(app: Router) {
     string,
     TsoaRoute.ParameterSchema
   > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     dataProvider: {
       in: 'query',
       name: 'dataProvider',
@@ -777,6 +827,7 @@ export function RegisterRoutes(app: Router) {
       required: true,
       dataType: 'string',
     },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
   app.get(
     '/api/v1/fxn/get-program-addresses',
@@ -804,6 +855,53 @@ export function RegisterRoutes(app: Router) {
 
         await templateService.apiHandler({
           methodName: 'getProgramAddresses',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsAuthController_registerAgent: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    agentData: {
+      in: 'body',
+      name: 'agentData',
+      required: true,
+      ref: 'RegisterAgentRequestDto',
+    },
+  };
+  app.post(
+    '/api/v1/auth/register-agent',
+    ...fetchMiddlewares<RequestHandler>(AuthController),
+    ...fetchMiddlewares<RequestHandler>(AuthController.prototype.registerAgent),
+
+    async function AuthController_registerAgent(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsAuthController_registerAgent,
+          request,
+          response,
+        });
+
+        const controller = new AuthController();
+
+        await templateService.apiHandler({
+          methodName: 'registerAgent',
           controller,
           response,
           next,

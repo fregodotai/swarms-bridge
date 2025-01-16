@@ -8,9 +8,17 @@
     "host": "data.frego.ai",
     "basePath": "/api/v1",
     "json": true,
-    "schemes": ["https"]
+    "schemes": ["https"],
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
   },
   "routes": {
+    "authenticationModule": "./src/middlewares/authentication.ts",
     "basePath": "/api/v1",
     "routesDir": "./src/routes",
     "middleware": "express"
