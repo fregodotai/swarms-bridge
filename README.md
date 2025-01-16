@@ -37,7 +37,7 @@ We aim to establish FREGO Swarms Bridge as the go-to interface for agentic swarm
 
 - [x] Setup public API backend service
 - [x] v1/base FXN integration
-- [ ] Setup instructions and example integrations
+- [x] Setup instructions and example integrations
 - [ ] Clearer contribution rules
 - [ ] Integrate with Frego Launchpad web3 auth service
 - [ ] API key management via Frego Launchpad webapp
@@ -61,6 +61,72 @@ We aim to establish FREGO Swarms Bridge as the go-to interface for agentic swarm
 
 Access the [Swagger API documentation](https://data.frego.ai/api-docs/) to explore available endpoints and test API requests.
 
+## Code Examples
+
+### Register Agent
+
+Register an agent with the following API request:
+
+```javascript
+fetch('https://data.frego.ai/api/v1/auth/register-agent', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ id: 1, name: 'test' }), // replace with your own data
+})
+  .then(res => res.json())
+  .then(res => console.log(res)); // { "apiKey": "c3ba5ba...8e9ea660" } - response example with the API key which allows you to make requests behalf of the user
+```
+
+- Replace the `id` and `name` with your own data
+- Receive the API key and store it for future requests
+
+### POST request to the FXN protocol example
+
+Send a POST request with your API key as a query parameter:
+
+```javascript
+const API_KEY = 'c3ba5ba...8e9ea660';
+fetch(`https://data.frego.ai/api/v1/fxn/data-provider-fee?apiKey=${API_KEY}`, {
+  // provide your API key as a query parameter
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ fee: 10 }), // replace with your own data
+})
+  .then(res => res.json())
+  .then(res => console.log(res)); // { "transactionSignature": "5LrcE2f6....MmujAhXD" } - response example
+```
+
+- Replace the `apiKey` with your own API key
+- Replace the `fee` with your own data
+- Receive the transaction signature
+
+### GET request to the FXN protocol example
+
+Send a GET request with your API key as a query parameter:
+
+```javascript
+const requestParams = {
+  apiKey: 'c3ba5ba...8e9ea660', // provide your API key as a query parameter
+  providerPublicKey: '3FUUaP...e6LosWs', // provide your provider public key as a query parameter
+};
+
+const urlSearchParams = new URLSearchParams(requestParams).toString();
+
+fetch(
+  `https://data.frego.ai/api/v1/fxn/get-subscriptions-for-provider?${urlSearchParams}`,
+)
+  .then(res => res.json())
+  .then(res => console.log(res)); // { "subscriptions": [...] } - response example
+```
+
+- Replace the `apiKey` with your own API key
+- Replace the `providerPublicKey` with your own provider public key
+- Receive the subscriptions
+
 ## Contributing
 
 We welcome contributions from the community! To contribute:
@@ -78,3 +144,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 - [Links page](https://links.frego.ai)
+
+```
+
+```
