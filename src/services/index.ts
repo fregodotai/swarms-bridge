@@ -1,4 +1,4 @@
 import { AppDataSource } from '../database/data-source';
-import AuthService from '../domains/auth/auth.service';
+import AuthService from '../domains/agents/agents.service';
 
-export const authService = new AuthService(AppDataSource);
+export const agentsService = new AuthService(AppDataSource);

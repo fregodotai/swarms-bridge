@@ -1,18 +1,20 @@
+import fetch from 'node-fetch';
 import { DataSource } from 'typeorm';
 
-import { RegisterAgentResponse } from './auth.types';
+import { evaluatedAgentsResponse, RegisterAgentResponse } from './agents.types';
 import RegisterAgentRequestDto from './dto/register-agent-request.dto';
+import config from '../../config/config';
 import { Agent } from '../../database/entity/agent';
 import { ApiKey } from '../../database/entity/api-key';
 import { Wallet } from '../../database/entity/wallet';
 import { AgentRepository } from '../../database/repository/agent.repository';
-import { ValidationError } from '../../utils/error-handlers';
+import { ServiceError, ValidationError } from '../../utils/error-handlers';
 import generateApiKey from '../../utils/generate-api-key';
 import { generateWallet } from '../../utils/generate-wallet';
 import { getFxnTokens } from '../../utils/get-fxn-tokens';
 import { encryptPrivateKey } from '../../utils/private-key-helpers';
 
-export default class AuthService {
+export default class AgentsService {
   constructor(private dataSource: DataSource) {}
 
   public async registerAgent({
@@ -47,5 +49,16 @@ export default class AuthService {
 
       return { apiKey: apiKey.apiKey };
     });
+  }
+
+  public async getEvaluatedAgents(): evaluatedAgentsResponse {
+    const apiUrl = config.fregoApiUrl;
+    try {
+      const response = await fetch(`${apiUrl}/agents/evaluated`);
+      return (await response.json()) as evaluatedAgentsResponse;
+    } catch (error) {
+      console.error(error);
+      throw new ServiceError(`Failed to fetch evaluated agents`);
+    }
   }
 }

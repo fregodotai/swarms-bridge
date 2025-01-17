@@ -38,6 +38,7 @@
     "fxn-protocol-sdk": "github:Oz-Networks/fxn-protocol-sdk#main",
     "mysql": "^2.14.1",
     "mysql2": "^3.12.0",
+    "node-fetch": "^3.3.2",
     "pm2": "^5.4.3",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^5.0.1",

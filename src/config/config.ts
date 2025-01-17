@@ -27,6 +27,7 @@ const config = {
   isProduction: process.env.NODE_ENV === 'production',
   encryptionKey: process.env.ENCRYPTION_KEY,
   fxnTokenCa: process.env.FXN_TOKEN_CA,
+  fregoApiUrl: process.env.FREGO_API_URL || 'https://api.frego.ai',
 };
 
 export default config;

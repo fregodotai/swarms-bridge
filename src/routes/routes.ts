@@ -6,7 +6,7 @@ import { fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { FxnController } from './../domains/fxn/fxn.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { AuthController } from './../domains/auth/auth.controller';
+import { AuthController } from './../domains/agents/agents.controller';
 import { expressAuthentication } from './../middlewares/authentication';
 // @ts-ignore - no great way to install types from subpackage
 import type {
@@ -286,6 +286,88 @@ const models: TsoaRoute.Models = {
       name: { dataType: 'string', required: true },
     },
     additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  AlignmentScore: {
+    dataType: 'refObject',
+    properties: {
+      agent_id: { dataType: 'double', required: true },
+      date_created: { dataType: 'string', required: true },
+      date_updated: { dataType: 'string', required: true },
+      id: { dataType: 'double', required: true },
+      observation_count: { dataType: 'double', required: true },
+      overall_score_percentage: { dataType: 'double', required: true },
+      platform: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Cognition: {
+    dataType: 'refObject',
+    properties: {
+      code: { dataType: 'string', required: true },
+      id: { dataType: 'double', required: true },
+      name: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Twitter: {
+    dataType: 'refObject',
+    properties: {
+      access_token: { dataType: 'string', required: true },
+      agent_id: { dataType: 'double', required: true },
+      enable_posting: { dataType: 'boolean', required: true },
+      expires_at: { dataType: 'double', required: true },
+      id: { dataType: 'double', required: true },
+      next_tweet: { dataType: 'string', required: true },
+      refresh_token: { dataType: 'string', required: true },
+      task_id: { dataType: 'string', required: true },
+      username: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  AgentFromFrego: {
+    dataType: 'refObject',
+    properties: {
+      active: { dataType: 'boolean', required: true },
+      alignment_scores: {
+        dataType: 'array',
+        array: { dataType: 'refObject', ref: 'AlignmentScore' },
+        required: true,
+      },
+      behavior_attrs: { dataType: 'string', required: true },
+      cognition_cadence: { ref: 'Cognition', required: true },
+      cognition_memory: { ref: 'Cognition', required: true },
+      cognition_reasoning: { ref: 'Cognition', required: true },
+      credits_remaining: { dataType: 'double', required: true },
+      date_created: { dataType: 'string', required: true },
+      description: { dataType: 'string', required: true },
+      editor_their_behavior: { dataType: 'string', required: true },
+      editor_their_goal: { dataType: 'string', required: true },
+      editor_who_they_are: { dataType: 'string', required: true },
+      id: { dataType: 'double', required: true },
+      interval_keep_alive_call: { dataType: 'double', required: true },
+      is_nft_based: { dataType: 'boolean', required: true },
+      linked_nft_id: { dataType: 'string', required: true },
+      model_type: { dataType: 'string', required: true },
+      name: { dataType: 'string', required: true },
+      picture_url: { dataType: 'string', required: true },
+      runs: { dataType: 'double', required: true },
+      tool_cals_available: { dataType: 'string', required: true },
+      twitter: { ref: 'Twitter', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  evaluatedAgentsResponse: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'array',
+      array: { dataType: 'refObject', ref: 'AgentFromFrego' },
+      validators: {},
+    },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -879,7 +961,7 @@ export function RegisterRoutes(app: Router) {
     },
   };
   app.post(
-    '/api/v1/auth/register-agent',
+    '/api/v1/agents/register',
     ...fetchMiddlewares<RequestHandler>(AuthController),
     ...fetchMiddlewares<RequestHandler>(AuthController.prototype.registerAgent),
 
@@ -902,6 +984,48 @@ export function RegisterRoutes(app: Router) {
 
         await templateService.apiHandler({
           methodName: 'registerAgent',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsAuthController_getEvaluatedAgents: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {};
+  app.get(
+    '/api/v1/agents/evaluated',
+    ...fetchMiddlewares<RequestHandler>(AuthController),
+    ...fetchMiddlewares<RequestHandler>(
+      AuthController.prototype.getEvaluatedAgents,
+    ),
+
+    async function AuthController_getEvaluatedAgents(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsAuthController_getEvaluatedAgents,
+          request,
+          response,
+        });
+
+        const controller = new AuthController();
+
+        await templateService.apiHandler({
+          methodName: 'getEvaluatedAgents',
           controller,
           response,
           next,
