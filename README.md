@@ -68,7 +68,7 @@ Access the [Swagger API documentation](https://data.frego.ai/api-docs/) to explo
 Register an agent with the following API request:
 
 ```javascript
-fetch('https://data.frego.ai/api/v1/auth/register-agent', {
+fetch('https://data.frego.ai/api/v1/agents/register', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

@@ -63,7 +63,7 @@ export default [
         'error',
         {
           selector: 'default',
-          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase', 'snake_case'],
           leadingUnderscore: 'allow',
         },
       ],

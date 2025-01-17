@@ -6,10 +6,11 @@ import {
   Response,
   Post,
   Body,
+  Get,
 } from 'tsoa';
 
-import { RegisterAgentResponse } from './auth.types';
-import { authService } from '../../services';
+import { evaluatedAgentsResponse, RegisterAgentResponse } from './agents.types';
+import { agentsService } from '../../services';
 import RegisterAgentRequestDto from './dto/register-agent-request.dto';
 import { createModel } from '../../utils/create-model';
 import {
@@ -18,18 +19,26 @@ import {
   IValidationError,
 } from '../../utils/error-handlers';
 
-@Tags('Auth')
-@Route('auth')
+@Tags('Agents')
+@Route('agents')
 export class AuthController extends Controller {
   @SuccessResponse('200')
   @Response<ErrorResponse<IServiceError>>('400', 'Service error')
   @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
-  @Post('/register-agent')
+  @Post('/register')
   public async registerAgent(
     @Body() agentData: RegisterAgentRequestDto,
   ): RegisterAgentResponse {
     const model = await createModel(RegisterAgentRequestDto, agentData);
 
-    return await authService.registerAgent(model);
+    return await agentsService.registerAgent(model);
+  }
+
+  @SuccessResponse('200')
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Get('/evaluated')
+  public async getEvaluatedAgents(): evaluatedAgentsResponse {
+    return await agentsService.getEvaluatedAgents();
   }
 }

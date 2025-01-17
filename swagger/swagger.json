@@ -329,6 +329,219 @@
         "required": ["id", "name"],
         "type": "object",
         "additionalProperties": false
+      },
+      "AlignmentScore": {
+        "properties": {
+          "agent_id": {
+            "type": "number",
+            "format": "double"
+          },
+          "date_created": {
+            "type": "string"
+          },
+          "date_updated": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "observation_count": {
+            "type": "number",
+            "format": "double"
+          },
+          "overall_score_percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "platform": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agent_id",
+          "date_created",
+          "date_updated",
+          "id",
+          "observation_count",
+          "overall_score_percentage",
+          "platform"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Cognition": {
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["code", "id", "name"],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Twitter": {
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "number",
+            "format": "double"
+          },
+          "enable_posting": {
+            "type": "boolean"
+          },
+          "expires_at": {
+            "type": "number",
+            "format": "double"
+          },
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "next_tweet": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_token",
+          "agent_id",
+          "enable_posting",
+          "expires_at",
+          "id",
+          "next_tweet",
+          "refresh_token",
+          "task_id",
+          "username"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AgentFromFrego": {
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "alignment_scores": {
+            "items": {
+              "$ref": "#/components/schemas/AlignmentScore"
+            },
+            "type": "array"
+          },
+          "behavior_attrs": {
+            "type": "string"
+          },
+          "cognition_cadence": {
+            "$ref": "#/components/schemas/Cognition"
+          },
+          "cognition_memory": {
+            "$ref": "#/components/schemas/Cognition"
+          },
+          "cognition_reasoning": {
+            "$ref": "#/components/schemas/Cognition"
+          },
+          "credits_remaining": {
+            "type": "number",
+            "format": "double"
+          },
+          "date_created": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "editor_their_behavior": {
+            "type": "string"
+          },
+          "editor_their_goal": {
+            "type": "string"
+          },
+          "editor_who_they_are": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "interval_keep_alive_call": {
+            "type": "number",
+            "format": "double"
+          },
+          "is_nft_based": {
+            "type": "boolean"
+          },
+          "linked_nft_id": {
+            "type": "string"
+          },
+          "model_type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "picture_url": {
+            "type": "string"
+          },
+          "runs": {
+            "type": "number",
+            "format": "double"
+          },
+          "tool_cals_available": {
+            "type": "string"
+          },
+          "twitter": {
+            "$ref": "#/components/schemas/Twitter"
+          }
+        },
+        "required": [
+          "active",
+          "alignment_scores",
+          "behavior_attrs",
+          "cognition_cadence",
+          "cognition_memory",
+          "cognition_reasoning",
+          "credits_remaining",
+          "date_created",
+          "description",
+          "editor_their_behavior",
+          "editor_their_goal",
+          "editor_who_they_are",
+          "id",
+          "interval_keep_alive_call",
+          "is_nft_based",
+          "linked_nft_id",
+          "model_type",
+          "name",
+          "picture_url",
+          "runs",
+          "tool_cals_available",
+          "twitter"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "evaluatedAgentsResponse": {
+        "items": {
+          "$ref": "#/components/schemas/AgentFromFrego"
+        },
+        "type": "array"
       }
     },
     "securitySchemes": {
@@ -1003,7 +1216,7 @@
         ]
       }
     },
-    "/auth/register-agent": {
+    "/agents/register": {
       "post": {
         "operationId": "RegisterAgent",
         "responses": {
@@ -1038,7 +1251,7 @@
             }
           }
         },
-        "tags": ["Auth"],
+        "tags": ["Agents"],
         "security": [],
         "parameters": [],
         "requestBody": {
@@ -1051,6 +1264,46 @@
             }
           }
         }
+      }
+    },
+    "/agents/evaluated": {
+      "get": {
+        "operationId": "GetEvaluatedAgents",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/evaluatedAgentsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Agents"],
+        "security": [],
+        "parameters": []
       }
     }
   },
