@@ -10,7 +10,7 @@ import {
 } from 'fxn-protocol-sdk/dist/client/fxn-solana-adapter';
 
 import {
-  GetAllSubscriptionsResponse,
+  CreateSubscriptionResponse,
   GetProviderTokenAccountResponse,
   GetQualityInfoResponse,
   GetSubscriberDetailsResponse,
@@ -18,6 +18,7 @@ import {
   GetSubscriptionStatusResponse,
   ProgramAddressResponse,
   SubscriberDetails,
+  SubscriptionListParams,
   TransactionSignatureResponse,
 } from './fxn.types';
 import { ServiceError } from '../../utils/error-handlers';
@@ -48,15 +49,99 @@ export default class FxnService {
 
   public async createSubscription(
     params: CreateSubscriptionParams,
-  ): TransactionSignatureResponse {
+  ): CreateSubscriptionResponse {
     try {
       const transactionSignature =
         await this.adapter.createSubscription(params);
-      return { transactionSignature };
+      return transactionSignature;
     } catch (error) {
       throw new ServiceError(error, [
         {
           message: 'Failed to create subscription',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
+  }
+
+  public async subscriptionLists(
+    params: Pick<SubscriptionListParams, 'dataProvider'>,
+  ): TransactionSignatureResponse {
+    try {
+      const transactionSignature = await this.adapter.subscriptionLists(params);
+      return { transactionSignature };
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to list subscriptions',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
+  }
+
+  public async reallocSubscriptionLists(
+    params: SubscriptionListParams,
+  ): TransactionSignatureResponse {
+    try {
+      const transactionSignature =
+        await this.adapter.reallocSubscriptionLists(params);
+      return { transactionSignature };
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to reallocate subscription lists',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
+  }
+
+  public async initMySubscriptionsList(
+    params: SubscriptionListParams,
+  ): TransactionSignatureResponse {
+    try {
+      const transactionSignature =
+        await this.adapter.initMySubscriptionsList(params);
+      return { transactionSignature };
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to initialize my subscriptions list',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
+  }
+
+  public async initSubscribersList(
+    params: SubscriptionListParams,
+  ): TransactionSignatureResponse {
+    try {
+      const transactionSignature =
+        await this.adapter.initSubscribersList(params);
+      return { transactionSignature };
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to initialize subscribers list',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
+  }
+
+  public async addSubscriptionsLists(
+    params: SubscriptionListParams,
+  ): TransactionSignatureResponse {
+    try {
+      const transactionSignature =
+        await this.adapter.addSubscriptionsLists(params);
+      return { transactionSignature };
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to add subscriptions lists',
           reason: 'Unexpected error in fxn-protocol-sdk',
         },
       ]);
@@ -118,12 +203,14 @@ export default class FxnService {
 
   public async getAllSubscriptionsForUser(
     userPublicKey: PublicKey,
-  ): GetAllSubscriptionsResponse {
+  ): GetSubscriberDetailsResponse {
     try {
-      const subscriptions =
+      const subscriberDetails =
         await this.adapter.getAllSubscriptionsForUser(userPublicKey);
 
-      return { subscriptions };
+      return {
+        subscriptions: subscriberDetails as unknown as SubscriberDetails[],
+      };
     } catch (error) {
       throw new ServiceError(error, [
         {

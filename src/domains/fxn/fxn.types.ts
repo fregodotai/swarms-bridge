@@ -27,9 +27,18 @@ export interface SubscriptionStatus {
   subscription: SubscriptionAccount;
 }
 
+export interface SubscriptionListParams {
+  subscriber: PublicKey;
+  dataProvider: PublicKey;
+  mySubscriptionsPDA: PublicKey;
+  subscribersListPDA: PublicKey;
+}
+
 export type TransactionSignatureResponse = Promise<{
   transactionSignature: TransactionSignature;
 }>;
+
+export type CreateSubscriptionResponse = Promise<TransactionSignature[]>;
 
 export type GetSubscriptionStatusResponse = {
   status: SubscriptionStatus['status'];
@@ -41,10 +50,6 @@ export type GetProviderTokenAccountResponse = Promise<{
 
 export type GetSubscriberDetailsResponse = Promise<{
   subscriptions: SubscriberDetails[];
-}>;
-
-export type GetAllSubscriptionsResponse = Promise<{
-  subscriptions: SubscriptionStatus[];
 }>;
 
 export type GetSubscriptionStateResponse = Promise<{
