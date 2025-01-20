@@ -480,15 +480,15 @@ export function RegisterRoutes(app: Router) {
   > = {
     req: { in: 'request', name: 'req', required: true, dataType: 'object' },
     dataProvider: {
-      in: 'body',
+      in: 'query',
       name: 'dataProvider',
       required: true,
       dataType: 'string',
     },
     apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
   };
-  app.post(
-    '/api/v1/fxn/subscription-list',
+  app.get(
+    '/api/v1/fxn/subscription-lists',
     ...fetchMiddlewares<RequestHandler>(FxnController),
     ...fetchMiddlewares<RequestHandler>(
       FxnController.prototype.subscriptionLists,

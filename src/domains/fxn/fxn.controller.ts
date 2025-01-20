@@ -117,10 +117,10 @@ export class FxnController extends Controller {
   @Middlewares(getAnchorProviderMiddleware)
   @Response<ErrorResponse<IServiceError>>('400', 'Service error')
   @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
-  @Post('/subscription-list')
+  @Get('/subscription-lists')
   public async subscriptionLists(
     @Request() req: express.Request,
-    @Body() dataProvider: string,
+    @Query() dataProvider: string,
     // eslint-disable-next-line
     @Query() apiKey?: string,
   ): TransactionSignatureResponse {
