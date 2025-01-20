@@ -85,6 +85,15 @@ const models: TsoaRoute.Models = {
     additionalProperties: false,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CreateSubscriptionResponse: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'array',
+      array: { dataType: 'refAlias', ref: 'TransactionSignature' },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   CreateSubscriptionRequestDto: {
     dataType: 'refObject',
     properties: {
@@ -92,6 +101,17 @@ const models: TsoaRoute.Models = {
       recipient: { dataType: 'string', required: true },
       durationInDays: { dataType: 'double', required: true },
       nftTokenAccount: { dataType: 'string', required: true },
+    },
+    additionalProperties: false,
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  SubscriptionListRequestDto: {
+    dataType: 'refObject',
+    properties: {
+      subscriber: { dataType: 'string', required: true },
+      dataProvider: { dataType: 'string', required: true },
+      mySubscriptionsPDA: { dataType: 'string', required: true },
+      subscribersListPDA: { dataType: 'string', required: true },
     },
     additionalProperties: false,
   },
@@ -167,38 +187,6 @@ const models: TsoaRoute.Models = {
         subscriptions: {
           dataType: 'array',
           array: { dataType: 'refObject', ref: 'SubscriberDetails' },
-          required: true,
-        },
-      },
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  SubscriptionStatus: {
-    dataType: 'refObject',
-    properties: {
-      status: {
-        dataType: 'union',
-        subSchemas: [
-          { dataType: 'enum', enums: ['active'] },
-          { dataType: 'enum', enums: ['expired'] },
-          { dataType: 'enum', enums: ['expiring_soon'] },
-        ],
-        required: true,
-      },
-      subscription: { ref: 'SubscriptionAccount', required: true },
-    },
-    additionalProperties: false,
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  GetAllSubscriptionsResponse: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        subscriptions: {
-          dataType: 'array',
-          array: { dataType: 'refObject', ref: 'SubscriptionStatus' },
           required: true,
         },
       },
@@ -474,6 +462,261 @@ export function RegisterRoutes(app: Router) {
 
         await templateService.apiHandler({
           methodName: 'createSubscription',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsFxnController_subscriptionLists: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
+    dataProvider: {
+      in: 'body',
+      name: 'dataProvider',
+      required: true,
+      dataType: 'string',
+    },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
+  };
+  app.post(
+    '/api/v1/fxn/subscription-list',
+    ...fetchMiddlewares<RequestHandler>(FxnController),
+    ...fetchMiddlewares<RequestHandler>(
+      FxnController.prototype.subscriptionLists,
+    ),
+
+    async function FxnController_subscriptionLists(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsFxnController_subscriptionLists,
+          request,
+          response,
+        });
+
+        const controller = new FxnController();
+
+        await templateService.apiHandler({
+          methodName: 'subscriptionLists',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsFxnController_reallocSubscriptionLists: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
+    subscriptionListParams: {
+      in: 'body',
+      name: 'subscriptionListParams',
+      required: true,
+      ref: 'SubscriptionListRequestDto',
+    },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
+  };
+  app.post(
+    '/api/v1/fxn/realloc-subscription-list',
+    ...fetchMiddlewares<RequestHandler>(FxnController),
+    ...fetchMiddlewares<RequestHandler>(
+      FxnController.prototype.reallocSubscriptionLists,
+    ),
+
+    async function FxnController_reallocSubscriptionLists(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsFxnController_reallocSubscriptionLists,
+          request,
+          response,
+        });
+
+        const controller = new FxnController();
+
+        await templateService.apiHandler({
+          methodName: 'reallocSubscriptionLists',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsFxnController_initMySubscriptionsList: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
+    subscriptionListParams: {
+      in: 'body',
+      name: 'subscriptionListParams',
+      required: true,
+      ref: 'SubscriptionListRequestDto',
+    },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
+  };
+  app.post(
+    '/api/v1/fxn/init-my-subscription-list',
+    ...fetchMiddlewares<RequestHandler>(FxnController),
+    ...fetchMiddlewares<RequestHandler>(
+      FxnController.prototype.initMySubscriptionsList,
+    ),
+
+    async function FxnController_initMySubscriptionsList(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsFxnController_initMySubscriptionsList,
+          request,
+          response,
+        });
+
+        const controller = new FxnController();
+
+        await templateService.apiHandler({
+          methodName: 'initMySubscriptionsList',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsFxnController_initSubscribersList: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
+    subscriptionListParams: {
+      in: 'body',
+      name: 'subscriptionListParams',
+      required: true,
+      ref: 'SubscriptionListRequestDto',
+    },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
+  };
+  app.post(
+    '/api/v1/fxn/init-subscribers-list',
+    ...fetchMiddlewares<RequestHandler>(FxnController),
+    ...fetchMiddlewares<RequestHandler>(
+      FxnController.prototype.initSubscribersList,
+    ),
+
+    async function FxnController_initSubscribersList(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsFxnController_initSubscribersList,
+          request,
+          response,
+        });
+
+        const controller = new FxnController();
+
+        await templateService.apiHandler({
+          methodName: 'initSubscribersList',
+          controller,
+          response,
+          next,
+          validatedArgs,
+          successStatus: 200,
+        });
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  const argsFxnController_addSubscriptionsLists: Record<
+    string,
+    TsoaRoute.ParameterSchema
+  > = {
+    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
+    subscriptionListParams: {
+      in: 'body',
+      name: 'subscriptionListParams',
+      required: true,
+      ref: 'SubscriptionListRequestDto',
+    },
+    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
+  };
+  app.post(
+    '/api/v1/fxn/add-subscriptions-list',
+    ...fetchMiddlewares<RequestHandler>(FxnController),
+    ...fetchMiddlewares<RequestHandler>(
+      FxnController.prototype.addSubscriptionsLists,
+    ),
+
+    async function FxnController_addSubscriptionsLists(
+      request: ExRequest,
+      response: ExResponse,
+      next: any,
+    ) {
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = templateService.getValidatedArgs({
+          args: argsFxnController_addSubscriptionsLists,
+          request,
+          response,
+        });
+
+        const controller = new FxnController();
+
+        await templateService.apiHandler({
+          methodName: 'addSubscriptionsLists',
           controller,
           response,
           next,

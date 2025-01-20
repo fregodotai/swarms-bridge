@@ -78,6 +78,12 @@
         "type": "object",
         "additionalProperties": false
       },
+      "CreateSubscriptionResponse": {
+        "items": {
+          "$ref": "#/components/schemas/TransactionSignature"
+        },
+        "type": "array"
+      },
       "CreateSubscriptionRequestDto": {
         "properties": {
           "dataProvider": {
@@ -99,6 +105,30 @@
           "recipient",
           "durationInDays",
           "nftTokenAccount"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SubscriptionListRequestDto": {
+        "properties": {
+          "subscriber": {
+            "type": "string"
+          },
+          "dataProvider": {
+            "type": "string"
+          },
+          "mySubscriptionsPDA": {
+            "type": "string"
+          },
+          "subscribersListPDA": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "subscriber",
+          "dataProvider",
+          "mySubscriptionsPDA",
+          "subscribersListPDA"
         ],
         "type": "object",
         "additionalProperties": false
@@ -165,32 +195,6 @@
           "subscriptions": {
             "items": {
               "$ref": "#/components/schemas/SubscriberDetails"
-            },
-            "type": "array"
-          }
-        },
-        "required": ["subscriptions"],
-        "type": "object"
-      },
-      "SubscriptionStatus": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["active", "expired", "expiring_soon"]
-          },
-          "subscription": {
-            "$ref": "#/components/schemas/SubscriptionAccount"
-          }
-        },
-        "required": ["status", "subscription"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetAllSubscriptionsResponse": {
-        "properties": {
-          "subscriptions": {
-            "items": {
-              "$ref": "#/components/schemas/SubscriptionStatus"
             },
             "type": "array"
           }
@@ -630,7 +634,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                  "$ref": "#/components/schemas/CreateSubscriptionResponse"
                 }
               }
             }
@@ -675,6 +679,306 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateSubscriptionRequestDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fxn/subscription-list": {
+      "post": {
+        "operationId": "SubscriptionLists",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["FXN"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fxn/realloc-subscription-list": {
+      "post": {
+        "operationId": "ReallocSubscriptionLists",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["FXN"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionListRequestDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fxn/init-my-subscription-list": {
+      "post": {
+        "operationId": "InitMySubscriptionsList",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["FXN"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionListRequestDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fxn/init-subscribers-list": {
+      "post": {
+        "operationId": "InitSubscribersList",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["FXN"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionListRequestDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fxn/add-subscriptions-list": {
+      "post": {
+        "operationId": "AddSubscriptionsLists",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionSignatureResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["FXN"],
+        "security": [],
+        "parameters": [
+          {
+            "description": "Provide an API key as a query parameter to call request on behalf of the user",
+            "in": "query",
+            "name": "apiKey",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionListRequestDto"
               }
             }
           }
@@ -865,7 +1169,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllSubscriptionsResponse"
+                  "$ref": "#/components/schemas/GetSubscriberDetailsResponse"
                 }
               }
             }

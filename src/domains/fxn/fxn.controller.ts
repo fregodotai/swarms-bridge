@@ -24,15 +24,17 @@ import CancelSubscriptionRequestDto from './dto/cancel-subscription-request.dto'
 import CreateSubscriptionRequestDto from './dto/create-subscription-request.dto';
 import DataProviderFeeRequestDto from './dto/data-provider-fee-request.dto';
 import RenewSubscriptionRequestDto from './dto/renew-subscription-request.dto';
+import SubscriptionListRequestDto from './dto/subscription-list-request.dto';
 import FxnService from './fxn.service';
 import {
-  GetAllSubscriptionsResponse,
+  CreateSubscriptionResponse,
   GetProviderTokenAccountResponse,
   GetQualityInfoResponse,
   GetSubscriberDetailsResponse,
   GetSubscriptionStateResponse,
   GetSubscriptionStatusResponse,
   ProgramAddressResponse,
+  SubscriptionListParams,
   TransactionSignatureResponse,
 } from './fxn.types';
 import getAnchorProviderMiddleware from '../../middlewares/get-anchor-provider';
@@ -87,7 +89,7 @@ export class FxnController extends Controller {
     @Body() createSubscriptionData: CreateSubscriptionRequestDto,
     // eslint-disable-next-line
     @Query() apiKey?: string,
-  ): TransactionSignatureResponse {
+  ): CreateSubscriptionResponse {
     const model = await createModel(
       CreateSubscriptionRequestDto,
       createSubscriptionData,
@@ -106,6 +108,164 @@ export class FxnController extends Controller {
     const fxnService = new FxnService(req.anchorProvider);
 
     return await fxnService.createSubscription(convertedModel);
+  }
+
+  /**
+   * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
+   */
+  @SuccessResponse('200')
+  @Middlewares(getAnchorProviderMiddleware)
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Post('/subscription-list')
+  public async subscriptionLists(
+    @Request() req: express.Request,
+    @Body() dataProvider: string,
+    // eslint-disable-next-line
+    @Query() apiKey?: string,
+  ): TransactionSignatureResponse {
+    const convertedDataProvider = new PublicKey(dataProvider);
+
+    if (!req.anchorProvider)
+      throw new ServiceError('Cannot get anchor provider');
+
+    const fxnService = new FxnService(req.anchorProvider);
+
+    return await fxnService.subscriptionLists({
+      dataProvider: convertedDataProvider,
+    });
+  }
+
+  /**
+   * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
+   */
+  @SuccessResponse('200')
+  @Middlewares(getAnchorProviderMiddleware)
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Post('/realloc-subscription-list')
+  public async reallocSubscriptionLists(
+    @Request() req: express.Request,
+    @Body() subscriptionListParams: SubscriptionListRequestDto,
+    // eslint-disable-next-line
+    @Query() apiKey?: string,
+  ): TransactionSignatureResponse {
+    const model = await createModel(
+      SubscriptionListRequestDto,
+      subscriptionListParams,
+    );
+
+    const convertedModel: SubscriptionListParams = {
+      subscriber: new PublicKey(model.subscriber),
+      dataProvider: new PublicKey(model.dataProvider),
+      mySubscriptionsPDA: new PublicKey(model.mySubscriptionsPDA),
+      subscribersListPDA: new PublicKey(model.subscribersListPDA),
+    };
+    if (!req.anchorProvider)
+      throw new ServiceError('Cannot get anchor provider');
+
+    const fxnService = new FxnService(req.anchorProvider);
+
+    return await fxnService.reallocSubscriptionLists(convertedModel);
+  }
+
+  /**
+   * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
+   */
+  @SuccessResponse('200')
+  @Middlewares(getAnchorProviderMiddleware)
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Post('/init-my-subscription-list')
+  public async initMySubscriptionsList(
+    @Request() req: express.Request,
+    @Body() subscriptionListParams: SubscriptionListRequestDto,
+    // eslint-disable-next-line
+    @Query() apiKey?: string,
+  ): TransactionSignatureResponse {
+    const model = await createModel(
+      SubscriptionListRequestDto,
+      subscriptionListParams,
+    );
+
+    const convertedModel: SubscriptionListParams = {
+      subscriber: new PublicKey(model.subscriber),
+      dataProvider: new PublicKey(model.dataProvider),
+      mySubscriptionsPDA: new PublicKey(model.mySubscriptionsPDA),
+      subscribersListPDA: new PublicKey(model.subscribersListPDA),
+    };
+    if (!req.anchorProvider)
+      throw new ServiceError('Cannot get anchor provider');
+
+    const fxnService = new FxnService(req.anchorProvider);
+
+    return await fxnService.initMySubscriptionsList(convertedModel);
+  }
+
+  /**
+   * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
+   */
+  @SuccessResponse('200')
+  @Middlewares(getAnchorProviderMiddleware)
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Post('/init-subscribers-list')
+  public async initSubscribersList(
+    @Request() req: express.Request,
+    @Body() subscriptionListParams: SubscriptionListRequestDto,
+    // eslint-disable-next-line
+    @Query() apiKey?: string,
+  ): TransactionSignatureResponse {
+    const model = await createModel(
+      SubscriptionListRequestDto,
+      subscriptionListParams,
+    );
+
+    const convertedModel: SubscriptionListParams = {
+      subscriber: new PublicKey(model.subscriber),
+      dataProvider: new PublicKey(model.dataProvider),
+      mySubscriptionsPDA: new PublicKey(model.mySubscriptionsPDA),
+      subscribersListPDA: new PublicKey(model.subscribersListPDA),
+    };
+    if (!req.anchorProvider)
+      throw new ServiceError('Cannot get anchor provider');
+
+    const fxnService = new FxnService(req.anchorProvider);
+
+    return await fxnService.initSubscribersList(convertedModel);
+  }
+
+  /**
+   * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
+   */
+  @SuccessResponse('200')
+  @Middlewares(getAnchorProviderMiddleware)
+  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  @Post('/add-subscriptions-list')
+  public async addSubscriptionsLists(
+    @Request() req: express.Request,
+    @Body() subscriptionListParams: SubscriptionListRequestDto,
+    // eslint-disable-next-line
+    @Query() apiKey?: string,
+  ): TransactionSignatureResponse {
+    const model = await createModel(
+      SubscriptionListRequestDto,
+      subscriptionListParams,
+    );
+
+    const convertedModel: SubscriptionListParams = {
+      subscriber: new PublicKey(model.subscriber),
+      dataProvider: new PublicKey(model.dataProvider),
+      mySubscriptionsPDA: new PublicKey(model.mySubscriptionsPDA),
+      subscribersListPDA: new PublicKey(model.subscribersListPDA),
+    };
+    if (!req.anchorProvider)
+      throw new ServiceError('Cannot get anchor provider');
+
+    const fxnService = new FxnService(req.anchorProvider);
+
+    return await fxnService.addSubscriptionsLists(convertedModel);
   }
 
   /**
@@ -195,7 +355,7 @@ export class FxnController extends Controller {
     @Query() providerPublicKey: string,
     // eslint-disable-next-line
     @Query() apiKey?: string,
-  ): GetAllSubscriptionsResponse {
+  ): GetSubscriberDetailsResponse {
     const convertedProviderPublicKey = new PublicKey(providerPublicKey);
 
     if (!req.anchorProvider)
