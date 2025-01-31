@@ -34,6 +34,8 @@ export interface SubscriptionListParams {
   subscribersListPDA: PublicKey;
 }
 
+export type AgentParamsResponse = Promise<TransactionSignature>;
+
 export type TransactionSignatureResponse = Promise<{
   transactionSignature: TransactionSignature;
 }>;

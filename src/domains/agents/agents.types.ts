@@ -1,5 +1,6 @@
 export type RegisterAgentResponse = Promise<{
   apiKey: string;
+  transactionSignature: string;
 }>;
 
 interface Twitter {

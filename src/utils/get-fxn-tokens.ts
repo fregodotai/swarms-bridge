@@ -4,7 +4,7 @@ import {
   getAssociatedTokenAddress,
   getMint,
 } from '@solana/spl-token';
-import { PublicKey, Transaction } from '@solana/web3.js';
+import { PublicKey, Transaction, LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 import createAnchorProvider from './create-anchor-provider';
 import { ServiceError } from './error-handlers';
@@ -46,6 +46,12 @@ export const getFxnTokens = async (
 
     const recipientAccountInfo =
       await anchorProvider.connection.getAccountInfo(toTokenAccount);
+    const AIRDROP_AMOUNT = 1 * LAMPORTS_PER_SOL;
+
+    await anchorProvider.connection.requestAirdrop(
+      recipientPubKey,
+      AIRDROP_AMOUNT,
+    );
 
     if (!recipientAccountInfo) {
       transaction.add(

@@ -7,6 +7,7 @@ import {
   RenewParams,
   SetDataProviderFeeParams,
   SubscriptionStatus,
+  AgentParams,
 } from 'fxn-protocol-sdk/dist/client/fxn-solana-adapter';
 
 import {
@@ -20,6 +21,7 @@ import {
   SubscriberDetails,
   SubscriptionListParams,
   TransactionSignatureResponse,
+  AgentParamsResponse,
 } from './fxn.types';
 import { ServiceError } from '../../utils/error-handlers';
 
@@ -28,6 +30,20 @@ export default class FxnService {
 
   constructor(anchorProvider: AnchorProvider) {
     this.adapter = new SolanaAdapter(anchorProvider);
+  }
+
+  public async registerAgent(params: AgentParams): AgentParamsResponse {
+    try {
+      const transactionSignature = await this.adapter.registerAgent(params);
+      return transactionSignature;
+    } catch (error) {
+      throw new ServiceError(error, [
+        {
+          message: 'Failed to register agent',
+          reason: 'Unexpected error in fxn-protocol-sdk',
+        },
+      ]);
+    }
   }
 
   public async setDataProviderFee(
@@ -165,22 +181,22 @@ export default class FxnService {
     }
   }
 
-  public async getProviderTokenAccount(
-    providerAddress: PublicKey,
-  ): GetProviderTokenAccountResponse {
-    try {
-      const tokenAccount =
-        await this.adapter.getProviderTokenAccount(providerAddress);
-      return { tokenAccount: tokenAccount.toBase58() };
-    } catch (error) {
-      throw new ServiceError(error, [
-        {
-          message: 'Failed to get provider token account',
-          reason: 'Unexpected error in fxn-protocol-sdk',
-        },
-      ]);
-    }
-  }
+  // public async getProviderTokenAccount(
+  //   providerAddress: PublicKey,
+  // ): GetProviderTokenAccountResponse {
+  //   try {
+  //     const tokenAccount =
+  //       await this.adapter.getProviderTokenAccount(providerAddress);
+  //     return { tokenAccount: tokenAccount.toBase58() };
+  //   } catch (error) {
+  //     throw new ServiceError(error, [
+  //       {
+  //         message: 'Failed to get provider token account',
+  //         reason: 'Unexpected error in fxn-protocol-sdk',
+  //       },
+  //     ]);
+  //   }
+  // }
 
   public async getSubscriptionsForProvider(
     providerPublicKey: PublicKey,

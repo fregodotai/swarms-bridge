@@ -8,11 +8,13 @@ import { Agent } from '../../database/entity/agent';
 import { ApiKey } from '../../database/entity/api-key';
 import { Wallet } from '../../database/entity/wallet';
 import { AgentRepository } from '../../database/repository/agent.repository';
+import createAnchorProvider from '../../utils/create-anchor-provider';
 import { ServiceError, ValidationError } from '../../utils/error-handlers';
 import generateApiKey from '../../utils/generate-api-key';
 import { generateWallet } from '../../utils/generate-wallet';
 import { getFxnTokens } from '../../utils/get-fxn-tokens';
 import { encryptPrivateKey } from '../../utils/private-key-helpers';
+import FxnService from '../fxn/fxn.service';
 
 export default class AgentsService {
   constructor(private dataSource: DataSource) {}
@@ -20,6 +22,10 @@ export default class AgentsService {
   public async registerAgent({
     id,
     name,
+    description,
+    restrict_subscriptions,
+    capabilities,
+    fee,
   }: RegisterAgentRequestDto): RegisterAgentResponse {
     const agentExists = await AgentRepository.findOneBy({ agentId: id });
 
@@ -44,10 +50,18 @@ export default class AgentsService {
       agent.apiKey = apiKey;
       agent.wallet = wallet;
       await agentRepository.save(agent);
+      await getFxnTokens(10, wallet.publicKey);
+      const anchorProvider = createAnchorProvider(privateKey);
+      const fxnService = new FxnService(anchorProvider);
+      const transactionSignature = await fxnService.registerAgent({
+        name,
+        description,
+        restrict_subscriptions,
+        capabilities,
+        fee,
+      });
 
-      await getFxnTokens(3, wallet.publicKey);
-
-      return { apiKey: apiKey.apiKey };
+      return { apiKey: apiKey.apiKey, transactionSignature };
     });
   }
 

@@ -95,17 +95,9 @@
           "durationInDays": {
             "type": "number",
             "format": "double"
-          },
-          "nftTokenAccount": {
-            "type": "string"
           }
         },
-        "required": [
-          "dataProvider",
-          "recipient",
-          "durationInDays",
-          "nftTokenAccount"
-        ],
+        "required": ["dataProvider", "recipient", "durationInDays"],
         "type": "object",
         "additionalProperties": false
       },
@@ -141,15 +133,6 @@
           }
         },
         "required": ["status"],
-        "type": "object"
-      },
-      "GetProviderTokenAccountResponse": {
-        "properties": {
-          "tokenAccount": {
-            "type": "string"
-          }
-        },
-        "required": ["tokenAccount"],
         "type": "object"
       },
       "PublicKey": {
@@ -240,9 +223,6 @@
           "qualityScore": {
             "type": "number",
             "format": "double"
-          },
-          "nftTokenAccount": {
-            "type": "string"
           }
         },
         "required": ["dataProvider", "qualityScore"],
@@ -313,11 +293,14 @@
       },
       "RegisterAgentResponse": {
         "properties": {
+          "transactionSignature": {
+            "type": "string"
+          },
           "apiKey": {
             "type": "string"
           }
         },
-        "required": ["apiKey"],
+        "required": ["transactionSignature", "apiKey"],
         "type": "object"
       },
       "RegisterAgentRequestDto": {
@@ -326,11 +309,34 @@
             "type": "number",
             "format": "double"
           },
+          "description": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
+          },
+          "restrict_subscriptions": {
+            "type": "boolean"
+          },
+          "capabilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "fee": {
+            "type": "number",
+            "format": "double"
           }
         },
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "description",
+          "name",
+          "restrict_subscriptions",
+          "capabilities",
+          "fee"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1028,64 +1034,6 @@
             "schema": {
               "format": "double",
               "type": "number"
-            }
-          },
-          {
-            "description": "Provide an API key as a query parameter to call request on behalf of the user",
-            "in": "query",
-            "name": "apiKey",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/fxn/get-provider-token-account": {
-      "get": {
-        "operationId": "GetProviderTokenAccount",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetProviderTokenAccountResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Service error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IServiceError_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse_IValidationError_"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["FXN"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "providerAddress",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           },
           {
