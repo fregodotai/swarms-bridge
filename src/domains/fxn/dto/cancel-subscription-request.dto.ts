@@ -9,7 +9,7 @@ export default class CancelSubscriptionRequestDto {
   @IsNumber()
   qualityScore: number;
 
-  @IsOptional()
-  @IsSolanaPublicKey()
-  nftTokenAccount?: string;
+  // @IsOptional()
+  // @IsSolanaPublicKey()
+  // nftTokenAccount?: string;
 }

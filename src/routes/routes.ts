@@ -100,7 +100,6 @@ const models: TsoaRoute.Models = {
       dataProvider: { dataType: 'string', required: true },
       recipient: { dataType: 'string', required: true },
       durationInDays: { dataType: 'double', required: true },
-      nftTokenAccount: { dataType: 'string', required: true },
     },
     additionalProperties: false,
   },
@@ -130,17 +129,6 @@ const models: TsoaRoute.Models = {
           ],
           required: true,
         },
-      },
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  GetProviderTokenAccountResponse: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        tokenAccount: { dataType: 'string', required: true },
       },
       validators: {},
     },
@@ -211,7 +199,6 @@ const models: TsoaRoute.Models = {
     properties: {
       dataProvider: { dataType: 'string', required: true },
       qualityScore: { dataType: 'double', required: true },
-      nftTokenAccount: { dataType: 'string' },
     },
     additionalProperties: false,
   },
@@ -262,7 +249,10 @@ const models: TsoaRoute.Models = {
     dataType: 'refAlias',
     type: {
       dataType: 'nestedObjectLiteral',
-      nestedProperties: { apiKey: { dataType: 'string', required: true } },
+      nestedProperties: {
+        transactionSignature: { dataType: 'string', required: true },
+        apiKey: { dataType: 'string', required: true },
+      },
       validators: {},
     },
   },
@@ -271,7 +261,15 @@ const models: TsoaRoute.Models = {
     dataType: 'refObject',
     properties: {
       id: { dataType: 'double', required: true },
+      description: { dataType: 'string', required: true },
       name: { dataType: 'string', required: true },
+      restrict_subscriptions: { dataType: 'boolean', required: true },
+      capabilities: {
+        dataType: 'array',
+        array: { dataType: 'string' },
+        required: true,
+      },
+      fee: { dataType: 'double', required: true },
     },
     additionalProperties: false,
   },
@@ -768,57 +766,6 @@ export function RegisterRoutes(app: Router) {
 
         await templateService.apiHandler({
           methodName: 'getSubscriptionStatus',
-          controller,
-          response,
-          next,
-          validatedArgs,
-          successStatus: 200,
-        });
-      } catch (err) {
-        return next(err);
-      }
-    },
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  const argsFxnController_getProviderTokenAccount: Record<
-    string,
-    TsoaRoute.ParameterSchema
-  > = {
-    req: { in: 'request', name: 'req', required: true, dataType: 'object' },
-    providerAddress: {
-      in: 'query',
-      name: 'providerAddress',
-      required: true,
-      dataType: 'string',
-    },
-    apiKey: { in: 'query', name: 'apiKey', dataType: 'string' },
-  };
-  app.get(
-    '/api/v1/fxn/get-provider-token-account',
-    ...fetchMiddlewares<RequestHandler>(FxnController),
-    ...fetchMiddlewares<RequestHandler>(
-      FxnController.prototype.getProviderTokenAccount,
-    ),
-
-    async function FxnController_getProviderTokenAccount(
-      request: ExRequest,
-      response: ExResponse,
-      next: any,
-    ) {
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = templateService.getValidatedArgs({
-          args: argsFxnController_getProviderTokenAccount,
-          request,
-          response,
-        });
-
-        const controller = new FxnController();
-
-        await templateService.apiHandler({
-          methodName: 'getProviderTokenAccount',
           controller,
           response,
           next,

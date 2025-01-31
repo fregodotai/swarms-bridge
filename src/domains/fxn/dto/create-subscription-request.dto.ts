@@ -12,6 +12,6 @@ export default class CreateSubscriptionRequestDto {
   @IsNumber()
   durationInDays: number;
 
-  @IsSolanaPublicKey()
-  nftTokenAccount: string;
+  // @IsSolanaPublicKey()
+  // nftTokenAccount: string;
 }

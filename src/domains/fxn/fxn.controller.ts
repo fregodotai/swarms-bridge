@@ -99,7 +99,7 @@ export class FxnController extends Controller {
       dataProvider: new PublicKey(model.dataProvider),
       recipient: model.recipient,
       durationInDays: model.durationInDays,
-      nftTokenAccount: new PublicKey(model.nftTokenAccount),
+      // nftTokenAccount: new PublicKey(model.nftTokenAccount),
     };
 
     if (!req.anchorProvider)
@@ -295,26 +295,26 @@ export class FxnController extends Controller {
   /**
    * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
    */
-  @SuccessResponse('200')
-  @Middlewares(getAnchorProviderMiddleware)
-  @Response<ErrorResponse<IServiceError>>('400', 'Service error')
-  @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
-  @Get('/get-provider-token-account')
-  public async getProviderTokenAccount(
-    @Request() req: express.Request,
-    @Query() providerAddress: string,
-    // eslint-disable-next-line
-    @Query() apiKey?: string,
-  ): GetProviderTokenAccountResponse {
-    const convertedProviderAddress = new PublicKey(providerAddress);
+  // @SuccessResponse('200')
+  // @Middlewares(getAnchorProviderMiddleware)
+  // @Response<ErrorResponse<IServiceError>>('400', 'Service error')
+  // @Response<ErrorResponse<IValidationError>>('422', 'Validation failed')
+  // @Get('/get-provider-token-account')
+  // public async getProviderTokenAccount(
+  //   @Request() req: express.Request,
+  //   @Query() providerAddress: string,
+  //   // eslint-disable-next-line
+  //   @Query() apiKey?: string,
+  // ): GetProviderTokenAccountResponse {
+  //   const convertedProviderAddress = new PublicKey(providerAddress);
 
-    if (!req.anchorProvider)
-      throw new ServiceError('Cannot get anchor provider');
+  //   if (!req.anchorProvider)
+  //     throw new ServiceError('Cannot get anchor provider');
 
-    const fxnService = new FxnService(req.anchorProvider);
+  //   const fxnService = new FxnService(req.anchorProvider);
 
-    return await fxnService.getProviderTokenAccount(convertedProviderAddress);
-  }
+  //   return await fxnService.getProviderTokenAccount(convertedProviderAddress);
+  // }
 
   /**
    * @param apiKey Provide an API key as a query parameter to call request on behalf of the user
@@ -389,7 +389,7 @@ export class FxnController extends Controller {
       newRecipient: model.newRecipient,
       newEndTime: model.newEndTime,
       qualityScore: model.qualityScore,
-      nftTokenAccount: new PublicKey(model.nftTokenAccount),
+      // nftTokenAccount: new PublicKey(model.nftTokenAccount),
     };
 
     if (!req.anchorProvider)
@@ -419,9 +419,9 @@ export class FxnController extends Controller {
     const convertedModel: CancelParams = {
       dataProvider: new PublicKey(model.dataProvider),
       qualityScore: model.qualityScore,
-      nftTokenAccount: model.nftTokenAccount
-        ? new PublicKey(model.nftTokenAccount)
-        : undefined,
+      // nftTokenAccount: model.nftTokenAccount
+      //   ? new PublicKey(model.nftTokenAccount)
+      //   : undefined,
     };
 
     if (!req.anchorProvider)
